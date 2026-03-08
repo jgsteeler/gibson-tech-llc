@@ -1,0 +1,382 @@
+---
+const pageTitle = "Gibson Tech | Divergent Engine and Product Innovation";
+const pageDescription =
+	"Gibson Tech builds software around the Divergent Engine, with Divergent Flow as flagship client zero, plus consulting, speaking, and premium plugin opportunities.";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="texture"></div>
+		<header class="topbar shell">
+			<p class="brand">G Tech</p>
+			<nav>
+				<a href="#platform">Platform</a>
+				<a href="#products">Products</a>
+				<a href="#revenue">Services</a>
+			</nav>
+		</header>
+
+		<main class="shell">
+			<section class="hero reveal">
+				<p class="eyebrow">Gibson Tech, LLC</p>
+				<h1>Building the business engine behind resilient software companies.</h1>
+				<p class="lead">
+					Legal name: Gibson Tech, LLC. Brand name: Gibson Tech (G Tech). We are building
+					<strong>Divergent Engine</strong> as the core platform with
+					<strong>Divergent Flow</strong> as flagship product and client zero.
+				</p>
+				<div class="actions">
+					<a class="button solid" href="https://getdivergentflow.com">Visit getdivergentflow.com</a>
+					<a class="button ghost" href="#platform">Explore the platform vision</a>
+				</div>
+			</section>
+
+			<section id="platform" class="panel reveal delay-1">
+				<h2>Divergent Engine First</h2>
+				<p>
+					Divergent Engine is the common foundation: plugin-driven, extensible, and built to
+					launch focused products quickly. Every new capability can become a reusable module,
+					premium plugin, or training offer.
+				</p>
+				<ul>
+					<li>Plugin marketplace managed by Gibson Tech</li>
+					<li>Premium first-party plugins and implementation patterns</li>
+					<li>Training and consulting layered on top of engine expertise</li>
+				</ul>
+			</section>
+
+			<section id="products" class="grid reveal delay-2">
+				<article class="card">
+					<h3>Divergent Flow (App)</h3>
+					<p>
+						Flagship experience built on the engine. It proves the architecture, validates
+						workflows, and demonstrates what can ship fast with the plugin model.
+					</p>
+				</article>
+				<article class="card">
+					<h3>Divergent Flow (Engine)</h3>
+					<p>
+						Internal and external foundation for future product lines, integrations, and a growing
+						marketplace ecosystem.
+					</p>
+				</article>
+				<article class="card">
+					<h3>Pipeline Product</h3>
+					<p>
+						Shop and service management software for small businesses, initially powering Gibson
+						Service Company and Gibson Tech client operations.
+					</p>
+				</article>
+			</section>
+
+			<section id="revenue" class="revenue reveal delay-3">
+				<h2>Multiple Revenue Lanes</h2>
+				<div class="lanes">
+					<p><span>01</span> Subscription products built on Divergent Engine</p>
+					<p><span>02</span> Plugin marketplace fees and premium plugin sales</p>
+					<p><span>03</span> Training, speaking, and implementation consulting</p>
+					<p><span>04</span> Specialized client delivery using shared engine modules</p>
+				</div>
+			</section>
+		</main>
+
+		<footer class="shell footer reveal delay-3">
+			<p>Gibson Tech, LLC | Brand: Gibson Tech / G Tech</p>
+			<p>Core thesis: Build around the engine, scale through products + expertise.</p>
+		</footer>
+	</body>
+</html>
+
+<style>
+	:root {
+		--royals-blue: #004687;
+		--royals-gold: #bd9b60;
+		--royals-powder: #7ab2dd;
+		--royals-white: #ffffff;
+		--bg: #edf4fc;
+		--ink: #0e2b54;
+		--ink-soft: #1f4f86;
+		--surface: #f8fbff;
+		--accent: var(--royals-gold);
+		--accent-2: var(--royals-powder);
+		--line: #a8c3df;
+		--shadow: 0 14px 40px rgba(0, 70, 135, 0.14);
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		margin: 0;
+		color: var(--ink);
+		font-family: "IBM Plex Sans", "Trebuchet MS", sans-serif;
+		background:
+			radial-gradient(circle at 18% 20%, rgba(122, 178, 221, 0.35), transparent 34%),
+			radial-gradient(circle at 84% 8%, rgba(189, 155, 96, 0.2), transparent 30%),
+			linear-gradient(160deg, #f8fbff 0%, #e8f1fb 52%, #ddebfd 100%);
+		min-height: 100vh;
+	}
+
+	.texture {
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		background-image: repeating-linear-gradient(
+			to bottom,
+			rgba(0, 70, 135, 0.045) 0,
+			rgba(0, 70, 135, 0.045) 1px,
+			transparent 1px,
+			transparent 5px
+		);
+		opacity: 0.45;
+	}
+
+	.shell {
+		width: min(1040px, calc(100vw - 3rem));
+		margin-inline: auto;
+		position: relative;
+		z-index: 1;
+	}
+
+	.topbar {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1.1rem 0;
+	}
+
+	.brand {
+		margin: 0;
+		font-family: "Chakra Petch", "Arial Narrow", sans-serif;
+		letter-spacing: 0.08em;
+		font-size: 1.1rem;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	nav {
+		display: flex;
+		gap: 1rem;
+	}
+
+	nav a {
+		color: var(--ink-soft);
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		transition: border-color 180ms ease;
+	}
+
+	nav a:hover {
+		color: var(--royals-blue);
+		border-color: var(--royals-gold);
+	}
+
+	.hero {
+		padding: 4rem 0 2.25rem;
+	}
+
+	.eyebrow {
+		margin: 0;
+		text-transform: uppercase;
+		letter-spacing: 0.14em;
+		font-size: 0.77rem;
+		color: var(--royals-gold);
+		font-weight: 600;
+	}
+
+	h1,
+	h2,
+	h3 {
+		margin-block: 0;
+		font-family: "Chakra Petch", "Arial Narrow", sans-serif;
+		line-height: 1.1;
+	}
+
+	h1 {
+		margin-top: 0.75rem;
+		max-width: 16ch;
+		font-size: clamp(2.1rem, 5vw, 4.2rem);
+	}
+
+	.lead {
+		margin-top: 1rem;
+		max-width: 64ch;
+		line-height: 1.7;
+		color: var(--ink-soft);
+	}
+
+	.actions {
+		margin-top: 1.6rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.8rem;
+	}
+
+	.button {
+		display: inline-block;
+		border-radius: 999px;
+		text-decoration: none;
+		padding: 0.65rem 1.1rem;
+		font-weight: 600;
+		transition: transform 180ms ease;
+	}
+
+	.button:hover {
+		transform: translateY(-2px);
+	}
+
+	.button.solid {
+		color: var(--royals-white);
+		border: 1px solid rgba(255, 255, 255, 0.25);
+		background: linear-gradient(95deg, var(--royals-blue), #00396e);
+	}
+
+	.button.ghost {
+		color: var(--royals-blue);
+		border: 1px solid var(--line);
+		background: rgba(255, 255, 255, 0.74);
+	}
+
+	.panel,
+	.card,
+	.revenue {
+		border: 1px solid var(--line);
+		border-radius: 1.1rem;
+		background: color-mix(in srgb, var(--surface) 82%, white);
+		box-shadow: var(--shadow);
+	}
+
+	.panel {
+		padding: 1.5rem;
+		margin: 0.75rem 0 1.2rem;
+	}
+
+	.panel p,
+	.card p {
+		line-height: 1.65;
+		color: var(--ink-soft);
+	}
+
+	.panel ul {
+		margin: 1rem 0 0;
+		padding: 0 0 0 1rem;
+		line-height: 1.8;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.card {
+		padding: 1.2rem;
+		min-height: 220px;
+	}
+
+	.revenue {
+		margin-top: 1.2rem;
+		padding: 1.4rem;
+	}
+
+	.lanes {
+		margin-top: 1rem;
+		display: grid;
+		gap: 0.7rem;
+	}
+
+	.lanes p {
+		margin: 0;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 0.75rem;
+		align-items: center;
+		font-weight: 500;
+	}
+
+	.lanes span {
+		font-family: "Chakra Petch", "Arial Narrow", sans-serif;
+		color: var(--royals-gold);
+		font-weight: 700;
+	}
+
+	.footer {
+		margin: 2rem auto 2.8rem;
+		border-top: 1px solid var(--line);
+		padding-top: 1rem;
+		color: var(--ink-soft);
+		font-size: 0.92rem;
+	}
+
+	.reveal {
+		opacity: 0;
+		transform: translateY(14px);
+		animation: rise 620ms ease forwards;
+	}
+
+	.delay-1 {
+		animation-delay: 120ms;
+	}
+
+	.delay-2 {
+		animation-delay: 210ms;
+	}
+
+	.delay-3 {
+		animation-delay: 320ms;
+	}
+
+	@keyframes rise {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
+
+		.card {
+			min-height: auto;
+		}
+	}
+
+	@media (max-width: 620px) {
+		.shell {
+			width: min(1040px, calc(100vw - 1.5rem));
+		}
+
+		.topbar {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.45rem;
+		}
+
+		nav {
+			flex-wrap: wrap;
+			gap: 0.65rem;
+		}
+
+		.hero {
+			padding-top: 2.6rem;
+		}
+	}
+</style>
