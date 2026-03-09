@@ -32,19 +32,50 @@ const pageDescription =
 		</header>
 
 		<main class="shell">
-			<section class="hero reveal">
-				<p class="eyebrow">Gibson Tech, LLC</p>
-				<h1>Building the business engine behind resilient software companies.</h1>
-				<p class="lead">
-					Legal name: Gibson Tech, LLC. Brand name: Gibson Tech (G Tech). We are building
-					<strong>Divergent Engine</strong> as the core platform with
-					<strong>Divergent Flow</strong> as flagship product and client zero.
-				</p>
-				<div class="actions">
-					<a class="button solid" href="https://getdivergentflow.com">Visit getdivergentflow.com</a>
-					<a class="button ghost" href="#platform">Explore the platform vision</a>
+			<section class="hero hero-grid">
+				<div class="hero-copy reveal">
+					<p class="eyebrow">Gibson Tech, LLC</p>
+					<h1>Building the business engine behind resilient software companies.</h1>
+					<p class="lead">
+						Legal name: Gibson Tech, LLC. Brand name: Gibson Tech (G Tech). We are building
+						<strong>Divergent Engine</strong> as the core platform with
+						<strong>Divergent Flow</strong> as flagship product and client zero.
+					</p>
+					<div class="actions">
+						<a class="button solid" href="https://getdivergentflow.com">Visit getdivergentflow.com</a>
+						<a class="button ghost" href="#platform">Explore the platform vision</a>
+					</div>
+				</div>
+				<div class="hero-brain reveal delay-1" aria-hidden="true">
+					<svg class="brain-network" viewBox="0 0 620 420" role="presentation" focusable="false">
+						<path class="brain-outline" d="M248 72c-48 0-94 31-112 77-18 47-4 102 35 140 29 28 69 43 108 42h22V72h-53z" />
+						<path class="brain-outline" d="M372 72c48 0 94 31 111 77 18 47 4 102-35 140-29 28-68 43-108 42h-20V72h52z" />
+						<path class="brain-outline center" d="M310 82v246" />
+
+						<path class="brain-line" d="M125 190h112l28-34h78" />
+						<path class="brain-line" d="M133 244h126l25 28h63" />
+						<path class="brain-line" d="M498 190H387l-28-34h-78" />
+						<path class="brain-line" d="M489 244H362l-25 28h-62" />
+						<path class="brain-line" d="M208 127l55 42" />
+						<path class="brain-line" d="M411 127l-55 42" />
+						<path class="brain-line soft" d="M211 299l61-42h76l62 42" />
+
+						<circle class="brain-node" cx="125" cy="190" r="7" />
+						<circle class="brain-node" cx="133" cy="244" r="6" />
+						<circle class="brain-node" cx="498" cy="190" r="7" />
+						<circle class="brain-node" cx="489" cy="244" r="6" />
+						<circle class="brain-node" cx="208" cy="127" r="6" />
+						<circle class="brain-node" cx="411" cy="127" r="6" />
+						<circle class="brain-node core" cx="310" cy="182" r="8" />
+						<circle class="brain-node core" cx="310" cy="256" r="8" />
+					</svg>
+					<p class="brain-caption">Brain-inspired signal map for Divergent systems thinking.</p>
 				</div>
 			</section>
+
+			<div class="signal-divider reveal delay-1" aria-hidden="true">
+				<span></span><span></span><span></span>
+			</div>
 
 			<section id="platform" class="panel reveal delay-1">
 				<h2>Divergent Engine First</h2>
@@ -59,6 +90,10 @@ const pageDescription =
 					<li>Training and consulting layered on top of engine expertise</li>
 				</ul>
 			</section>
+
+			<div class="signal-divider reveal delay-2" aria-hidden="true">
+				<span></span><span></span><span></span>
+			</div>
 
 			<section id="products" class="grid reveal delay-2">
 				<article class="card">
@@ -83,6 +118,10 @@ const pageDescription =
 					</p>
 				</article>
 			</section>
+
+			<div class="signal-divider reveal delay-3" aria-hidden="true">
+				<span></span><span></span><span></span>
+			</div>
 
 			<section id="revenue" class="revenue reveal delay-3">
 				<h2>Multiple Revenue Lanes</h2>
@@ -189,6 +228,119 @@ const pageDescription =
 
 	.hero {
 		padding: 4rem 0 2.25rem;
+	}
+
+	.hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+		gap: 1.4rem;
+		align-items: end;
+	}
+
+	.hero-copy {
+		max-width: 100%;
+	}
+
+	.hero-brain {
+		margin: 0;
+		position: relative;
+		overflow: hidden;
+		border-radius: 1.1rem;
+		border: 1px solid color-mix(in srgb, var(--royals-gold) 45%, var(--line));
+		padding: clamp(0.9rem, 2vw, 1.2rem);
+		background:
+			radial-gradient(circle at 84% 18%, rgba(189, 155, 96, 0.24), transparent 42%),
+			radial-gradient(circle at 24% 82%, rgba(122, 178, 221, 0.26), transparent 40%),
+			linear-gradient(140deg, #fafdff 0%, #eef6ff 56%, #e8f2ff 100%);
+		box-shadow: var(--shadow);
+	}
+
+	.brain-network {
+		width: 100%;
+		height: auto;
+		display: block;
+		filter: drop-shadow(0 8px 16px rgba(0, 70, 135, 0.14));
+	}
+
+	.brain-outline {
+		fill: rgba(122, 178, 221, 0.12);
+		stroke: rgba(0, 70, 135, 0.78);
+		stroke-width: 3;
+	}
+
+	.brain-outline.center {
+		fill: none;
+		stroke: rgba(189, 155, 96, 0.84);
+		stroke-dasharray: 6 8;
+	}
+
+	.brain-line {
+		fill: none;
+		stroke: rgba(0, 70, 135, 0.76);
+		stroke-width: 3;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.brain-line.soft {
+		stroke: rgba(189, 155, 96, 0.8);
+		stroke-width: 2.5;
+	}
+
+	.brain-node {
+		fill: var(--royals-white);
+		stroke: var(--royals-blue);
+		stroke-width: 3;
+		animation: signalPulse 2.8s ease-in-out infinite;
+	}
+
+	.brain-node.core {
+		fill: var(--royals-gold);
+		stroke: var(--royals-white);
+	}
+
+	.hero-brain::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background:
+			linear-gradient(145deg, rgba(0, 70, 135, 0) 54%, rgba(0, 70, 135, 0.12) 100%),
+			linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04));
+	}
+
+	.brain-caption {
+		margin: 0.4rem 0 0;
+		position: relative;
+		z-index: 1;
+		margin: 0;
+		padding: 0.35rem 0.12rem 0.1rem;
+		font-size: 0.73rem;
+		letter-spacing: 0.02em;
+		color: rgba(14, 43, 84, 0.82);
+	}
+
+	.signal-divider {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+		gap: 0.7rem;
+		margin: 0.35rem 0 1.1rem;
+	}
+
+	.signal-divider span {
+		height: 1px;
+		display: block;
+		background: linear-gradient(90deg, transparent, rgba(0, 70, 135, 0.5), transparent);
+	}
+
+	.signal-divider span:nth-child(2) {
+		position: relative;
+		width: 0.65rem;
+		height: 0.65rem;
+		border-radius: 999px;
+		background: var(--royals-gold);
+		box-shadow: 0 0 0 3px rgba(189, 155, 96, 0.2);
 	}
 
 	.eyebrow {
@@ -349,7 +501,24 @@ const pageDescription =
 		}
 	}
 
+	@keyframes signalPulse {
+		0%,
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+		50% {
+			transform: scale(1.08);
+			opacity: 0.78;
+		}
+	}
+
 	@media (max-width: 900px) {
+		.hero-grid {
+			grid-template-columns: 1fr;
+			align-items: start;
+		}
+
 		.grid {
 			grid-template-columns: 1fr;
 		}

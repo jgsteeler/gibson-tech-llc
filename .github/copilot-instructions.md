@@ -1,15 +1,15 @@
-# Copilot Project Setup Checklist
+# Gibson Tech - Development Guidelines
 
-- [x] Verify that the copilot-instructions.md file in the .github directory is created. Completed.
-- [x] Clarify Project Requirements. Astro site in root for Gibson Tech branding and company narrative.
-- [x] Scaffold the Project. Astro minimal project created in workspace root.
-- [x] Customize the Project. Branded homepage added for Gibson Tech, Divergent Engine, and revenue lanes.
-- [x] Install Required Extensions. No required extensions were provided by project setup info.
-- [x] Compile the Project. Dependencies installed and production build succeeded.
-- [x] Create and Run Task. Added and launched a VS Code task for `npm run dev`.
-- [x] Launch the Project. Prompted for debug mode; launch skipped by user choice.
-- [x] Ensure Documentation is Complete. README refreshed and HTML comments removed from this file.
+## Content & Privacy Governance
+- **Public Brand:** Refer to the business exclusively as "Gibson Tech".
+- **Internal Only:** Do NOT include legal business structures (LLC details), financial goals (Project 55), or internal brand vs. legal name distinctions in any public-facing code, meta tags, or page copy.
+- **Project Scope:** Focus public content on the "Universal Entity Engine (UEE)" and "Divergent Flow" platform.
 
-- Work through each checklist item systematically.
-- Keep communication concise and focused.
-- Follow development best practices.
+## Design & Aesthetic
+- **Visual Language:** Technical Noir / Minimalist High-Tech.
+- **Accents:** Use assets from `/assets` (specifically the brain and divergent line screenshots) as subtle background elements, masks, or glassmorphism textures rather than primary images.
+- **Layout:** Prioritize "G Tech" branding in the top-level header.
+
+## Architecture Philosophy
+- **Entity-First:** Prioritize Entity-First architecture for UEE-related data structures.
+- **Observability:** Incorporate the "Observability Loop" into the logic of Divergent Flow.
