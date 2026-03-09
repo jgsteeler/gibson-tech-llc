@@ -1,0 +1,12 @@
+---
+interface Props {
+  delay?: string;
+}
+
+const { delay = "" } = Astro.props;
+const className = ["signal-divider", "reveal", delay].filter(Boolean).join(" ");
+---
+
+<div class={className} aria-hidden="true">
+  <span></span><span></span><span></span>
+</div>

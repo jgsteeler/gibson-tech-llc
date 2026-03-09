@@ -1,15 +1,34 @@
-# Gibson Tech - Development Guidelines
+# Project Guidelines
 
-## Content & Privacy Governance
-- **Public Brand:** Refer to the business exclusively as "Gibson Tech".
-- **Internal Only:** Do NOT include legal business structures (LLC details), financial goals (Project 55), or internal brand vs. legal name distinctions in any public-facing code, meta tags, or page copy.
-- **Project Scope:** Focus public content on the "Universal Entity Engine (UEE)" and "Divergent Flow" platform.
+## Code Style
+- Keep the implementation simple and Astro-native: pages/components in `.astro`, scoped styles, minimal dependencies.
+- Prefer expressive typography and intentional visual direction over generic defaults; preserve the existing Technical Noir / Minimalist High-Tech language.
+- Keep copy concise and product-forward. Do not add legal/entity framing to public-facing copy.
 
-## Design & Aesthetic
-- **Visual Language:** Technical Noir / Minimalist High-Tech.
-- **Accents:** Use assets from `/assets` (specifically the brain and divergent line screenshots) as subtle background elements, masks, or glassmorphism textures rather than primary images.
-- **Layout:** Prioritize "G Tech" branding in the top-level header.
+## Architecture
+- The current site is a lean Astro marketing implementation with the homepage centered in `src/pages/index.astro`.
+- Preserve the Entity-First architecture framing for UEE-related structures and keep Divergent Flow aligned with the Observability Loop concept.
+- For larger updates, prefer extracting reusable sections into components rather than further expanding a single monolithic page.
 
-## Architecture Philosophy
-- **Entity-First:** Prioritize Entity-First architecture for UEE-related data structures.
-- **Observability:** Incorporate the "Observability Loop" into the logic of Divergent Flow.
+## Build and Test
+- Install dependencies: `npm install`
+- Start local dev server: `npm run dev` (Astro default `http://localhost:4321`)
+- Create production build: `npm run build`
+- Preview production build: `npm run preview`
+- Deployment target is Netlify using `netlify.toml` (`build.command = npm run build`, `publish = dist`).
+- There is currently no automated test suite; when introducing non-trivial behavior, add focused tests or validation steps where practical.
+
+## Conventions
+- Public brand usage: refer to the business as `Gibson Tech` (or `G Tech` in UI branding) in public-facing code and copy.
+- Do not include internal-only details in public surfaces:
+  - Legal structure names/LLC framing
+  - Financial goals (including Project 55)
+  - Internal brand-vs-legal naming distinctions
+- Public positioning should emphasize the Universal Entity Engine (UEE) and Divergent Flow platform.
+- UEE means Universal Entity Engine; Gibson Tech's branded implementation of that concept is the Divergent Engine.
+- Service vertical framing should support two audiences:
+  - Enterprise and platform teams evaluating UEE architecture resilience
+  - Local small businesses needing rapid app development and workflow automation
+- When writing local-business consulting copy, position the offer as precision rapid delivery built on the same engineering discipline as the platform work.
+- Visual accents should use assets in `/assets` as subtle atmospheric elements (texture, mask, glass layer), not dominant hero images.
+- Keep `G Tech` branding prominent in the top-level header/navigation area.

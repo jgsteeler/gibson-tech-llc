@@ -1,0 +1,149 @@
+---
+import SiteHead from "../components/home/SiteHead.astro";
+import "../styles/home.css";
+
+const pageTitle = "Gibson Tech | Consulting";
+const pageDescription =
+  "Rapid application development and workflow automation for local businesses, delivered with the same engineering discipline behind the Divergent Engine.";
+---
+
+<html lang="en">
+  <head>
+    <SiteHead title={pageTitle} description={pageDescription} />
+  </head>
+  <body>
+    <div class="texture"></div>
+    <div class="texture texture-lines"></div>
+
+    <header class="topbar shell">
+      <p class="brand">G Tech</p>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/#platform">Platform</a>
+        <a href="/#services">Services</a>
+      </nav>
+    </header>
+
+    <main class="shell consulting-page">
+      <section class="consulting-hero reveal">
+        <p class="eyebrow">Consulting and Custom Tooling</p>
+        <h1>Rapid App Development for Local Business Bottlenecks</h1>
+        <p class="lead">
+          You get focused software delivery without generic templates. We build lightweight web
+          apps that remove manual friction, automate repeatable work, and fit your exact operating
+          model.
+        </p>
+        <div class="actions">
+          <a class="button solid" href="/#consulting">Start a Project Conversation</a>
+          <a class="button ghost" href="/#products">See Platform Work</a>
+        </div>
+      </section>
+
+      <div class="signal-divider reveal delay-1" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+
+      <section class="panel reveal delay-1">
+        <h2>What We Build Quickly</h2>
+        <ul>
+          <li>Scheduling and dispatch tools tailored to your field workflow</li>
+          <li>Inventory, intake, and operations tracking apps that replace spreadsheet drift</li>
+          <li>Workflow automations that remove repetitive admin tasks</li>
+          <li>Internal dashboards for visibility into throughput, bottlenecks, and outcomes</li>
+        </ul>
+      </section>
+
+      <div class="signal-divider reveal delay-2" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+
+      <section class="process-grid reveal delay-2" aria-label="Consulting process">
+        <article class="card">
+          <p class="eyebrow">Step 01</p>
+          <h3>Discover</h3>
+          <p>
+            We map your current workflow, identify where time and reliability break down, and
+            choose the highest-impact app or automation to build first.
+          </p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Step 02</p>
+          <h3>Build</h3>
+          <p>
+            We ship a focused solution in short milestones with practical checkpoints so operators
+            can validate behavior early, not after everything is done.
+          </p>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Step 03</p>
+          <h3>Iterate</h3>
+          <p>
+            After launch, we refine the workflow, add targeted capabilities, and keep the solution
+            aligned with real operating constraints as your business evolves.
+          </p>
+        </article>
+      </section>
+
+      <div class="signal-divider reveal delay-3" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+
+      <section class="consulting-banner reveal delay-3">
+        <h2>Built with the Same Engineering Discipline as the Platform Work</h2>
+        <p>
+          Local delivery does not mean lower standards. Every engagement applies Entity-First
+          structure and observability-minded implementation so your team gets speed now and
+          maintainability later.
+        </p>
+        <div class="actions">
+          <a class="button ghost" href="/#consulting">Discuss Your Workflow</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="shell footer reveal delay-3">
+      <p>Gibson Tech</p>
+      <p>Rapid consulting delivery with resilient architecture foundations.</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .consulting-page {
+    padding-bottom: 1.2rem;
+  }
+
+  .consulting-hero {
+    padding: 3.4rem 0 2rem;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .consulting-banner {
+    border: 1px solid var(--line);
+    border-radius: 1.1rem;
+    margin-top: 1rem;
+    padding: 1.4rem;
+    background:
+      radial-gradient(circle at 90% 16%, rgba(122, 178, 221, 0.2), transparent 40%),
+      radial-gradient(circle at 10% 84%, rgba(189, 155, 96, 0.16), transparent 34%),
+      color-mix(in srgb, var(--surface) 84%, white);
+    box-shadow: var(--shadow);
+  }
+
+  .consulting-banner h2 {
+    max-width: 28ch;
+    font-size: clamp(1.4rem, 2.8vw, 2.15rem);
+  }
+
+  .consulting-banner p {
+    margin-top: 0.85rem;
+    max-width: 74ch;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+</style>
