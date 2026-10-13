@@ -1,19 +1,18 @@
 ---
 import "../styles/home.css";
-import AboutSection from "../components/home/AboutSection.astro";
-import ConsultingCalloutSection from "../components/home/ConsultingCalloutSection.astro";
+import Topbar from "../components/home/Topbar.astro";
 import HeroSection from "../components/home/HeroSection.astro";
 import PlatformSection from "../components/home/PlatformSection.astro";
 import ProductsSection from "../components/home/ProductsSection.astro";
+import ConsultingCalloutSection from "../components/home/ConsultingCalloutSection.astro";
 import ServicesSection from "../components/home/ServicesSection.astro";
-import SignalDivider from "../components/home/SignalDivider.astro";
+import AboutSection from "../components/home/AboutSection.astro";
 import SiteFooter from "../components/home/SiteFooter.astro";
 import SiteHead from "../components/home/SiteHead.astro";
-import Topbar from "../components/home/Topbar.astro";
 
-const pageTitle = "Gibson Tech | Divergent Engine";
+const pageTitle = "Gibson Tech, LLC | Enterprise Software Architecture & Application Security";
 const pageDescription =
-  "Gibson Tech builds the Universal Entity Engine, branded as the Divergent Engine, and ships Divergent Flow for resilient, observable software operations.";
+  "Gibson Tech, LLC delivers enterprise systems architecture, OAuth/Okta CIAM integrations, penetration-test audit defense, and pragmatic AI engineering mentorship.";
 ---
 
 <html lang="en">
@@ -22,22 +21,16 @@ const pageDescription =
   </head>
   <body>
     <div class="texture"></div>
-    <div class="texture texture-lines"></div>
 
     <Topbar />
 
     <main class="shell">
       <HeroSection />
-      <SignalDivider delay="delay-1" />
       <PlatformSection />
-      <SignalDivider delay="delay-2" />
       <ProductsSection />
-      <SignalDivider delay="delay-3" />
       <ConsultingCalloutSection />
-      <SignalDivider delay="delay-3" />
-      <AboutSection />
-      <SignalDivider delay="delay-3" />
       <ServicesSection />
+      <AboutSection />
     </main>
 
     <SiteFooter />

@@ -1,10 +1,60 @@
+---
+---
 <header class="topbar shell">
-  <p class="brand">G Tech</p>
+  <a href="/" class="brand-wrapper">
+    <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 5 L88 27 L88 45 L72 45 L72 36 L50 23 L28 36 L28 64 L50 77 L72 64 L72 50 L58 50 L58 40 L88 40 L88 73 L50 95 L12 73 L12 27 Z" fill="#004687" stroke="#1b6fc2" stroke-width="2" />
+      <path d="M35 34 L65 34 L65 42 L54 42 L54 68 L46 68 L46 42 L35 42 Z" fill="#bd9b60" stroke="#dec18e" stroke-width="1" />
+    </svg>
+    <div>
+      <span class="brand">Gibson Tech</span>
+      <span class="brand-tagline">Architecture & AppSec</span>
+    </div>
+  </a>
+
   <nav>
-    <a href="#platform">Platform</a>
-    <a href="#products">Products</a>
-    <a href="/consulting">Consulting</a>
+    <a href="#services">Services & C2C</a>
+    <a href="#platforms">Platforms</a>
+    <a href="#leadership">AI Mentorship</a>
     <a href="#about">About</a>
-    <a href="#services">Services</a>
+    
+    <!-- Theme Toggle Switch -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+      <span id="theme-icon">☀️</span>
+      <span id="theme-text">Light</span>
+    </button>
   </nav>
 </header>
+
+<script is:inline>
+  // Theme toggle script (runs immediately in browser)
+  const toggleBtn = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeText = document.getElementById('theme-text');
+
+  // Check initial preference from localStorage or default to dark
+  const savedTheme = localStorage.getItem('gtech-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  updateButtonState(savedTheme);
+
+  toggleBtn?.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    localStorage.setItem('gtech-theme', nextTheme);
+    updateButtonState(nextTheme);
+  });
+
+  function updateButtonState(theme) {
+    if (themeIcon && themeText) {
+      if (theme === 'dark') {
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light';
+      } else {
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark';
+      }
+    }
+  }
+</script>
