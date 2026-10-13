@@ -1,22 +1,37 @@
 ---
+import { config } from "../../config/features";
 ---
+
 <header class="topbar shell">
-  <a href="/" class="brand-wrapper">
-    <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 5 L88 27 L88 45 L72 45 L72 36 L50 23 L28 36 L28 64 L50 77 L72 64 L72 50 L58 50 L58 40 L88 40 L88 73 L50 95 L12 73 L12 27 Z" fill="#004687" stroke="#1b6fc2" stroke-width="2" />
-      <path d="M35 34 L65 34 L65 42 L54 42 L54 68 L46 68 L46 42 L35 42 Z" fill="#bd9b60" stroke="#dec18e" stroke-width="1" />
-    </svg>
-    <div>
-      <span class="brand">Gibson Tech</span>
-      <span class="brand-tagline">Architecture & AppSec</span>
-    </div>
+  <a href="/" class="brand-wrapper" aria-label="Gibson Tech, LLC">
+    <!-- Desktop / Tablet: Full Logo with Tagline (Dark & Light) -->
+    <img 
+      src="/assets/brand_header_dark.jpg" 
+      alt="Gibson Tech - Software Architecture, Application Security, Engineering Solutions" 
+      class="brand-logo-desktop brand-logo-dark" 
+    />
+    <img 
+      src="/assets/brand_header_light.jpg" 
+      alt="Gibson Tech - Software Architecture, Application Security, Engineering Solutions" 
+      class="brand-logo-desktop brand-logo-light" 
+    />
+
+    <!-- Mobile: Responsive Collapsed GT Monogram Icon -->
+    <img 
+      src="/assets/brand_icon.jpg" 
+      alt="Gibson Tech GT Icon" 
+      class="brand-logo-mobile" 
+    />
   </a>
 
   <nav>
-    <a href="#services">Services & C2C</a>
+    <a href="#capabilities">Capabilities</a>
+    <a href="#architecture">Architecture</a>
     <a href="#platforms">Platforms</a>
-    <a href="#leadership">AI Mentorship</a>
     <a href="#about">About</a>
+    <a href={config.linkedInUrl} target="_blank" rel="noopener" class="nav-linkedin-link">
+      LinkedIn ↗
+    </a>
     
     <!-- Theme Toggle Switch -->
     <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
@@ -27,12 +42,10 @@
 </header>
 
 <script is:inline>
-  // Theme toggle script (runs immediately in browser)
   const toggleBtn = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
   const themeText = document.getElementById('theme-text');
 
-  // Check initial preference from localStorage or default to dark
   const savedTheme = localStorage.getItem('gtech-theme') || 'dark';
   document.documentElement.setAttribute('data-theme', savedTheme);
   updateButtonState(savedTheme);

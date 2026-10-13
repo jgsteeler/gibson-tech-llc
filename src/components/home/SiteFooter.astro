@@ -1,4 +1,5 @@
 ---
+import { config } from "../../config/features";
 ---
 <footer class="footer shell">
   <div>
@@ -10,7 +11,7 @@
   <div class="footer-links">
     <a href="https://getdivergentflow.com" target="_blank" rel="noopener">Divergent Flow</a>
     <a href="https://gibsonsvc.com" target="_blank" rel="noopener">Gibson Service Co</a>
-    <a href="https://www.linkedin.com/in/johnnypgibson" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="mailto:jgsteeler@gmail.com">jgsteeler@gmail.com</a>
+    <a href={config.linkedInUrl} target="_blank" rel="noopener">LinkedIn</a>
+    <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>
   </div>
 </footer>

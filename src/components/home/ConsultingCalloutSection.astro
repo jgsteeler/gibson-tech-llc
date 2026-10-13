@@ -1,4 +1,5 @@
 ---
+import { config } from "../../config/features";
 ---
 <section id="leadership" class="consulting-callout reveal delay-3">
   <p class="eyebrow">Technical Leadership & Mentorship</p>
@@ -7,10 +8,13 @@
     Generative AI allows junior developers to rip through isolated user stories at warp speed. But real enterprises aren't greenfield startups—they are complex ecosystems of legacy dependencies and fragile integrations. Without architectural stewardship, AI-assisted development creates redundant persistence patterns and hidden technical debt.
   </p>
   <p>
-    Gibson Tech provides half-day team workshops and tech lead coaching on <strong>AI-era architectural governance</strong>: running open-mic live troubleshooting mobs so junior devs learn legacy diagnostic thought processes, and coaching teams to prompt AI (GitHub Copilot, M365) as an architectural auditor for Onion Architecture, CQRS, and SOLID compliance.
+    Gibson Tech provides engineering leadership and mentorship on <strong>AI-era architectural governance</strong>: running open-mic live troubleshooting mobs so junior developers learn legacy diagnostic thought processes, and coaching teams to prompt AI (GitHub Copilot, M365) as an architectural auditor for Onion Architecture, CQRS, and SOLID compliance.
   </p>
   <div class="actions">
-    <a class="button gold" href="mailto:jgsteeler@gmail.com?subject=AI%20Engineering%20Mentorship%20Workshop">Book Team Workshop ($3,500)</a>
-    <a class="button ghost" href="https://www.linkedin.com/in/johnnypgibson" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+    {config.flags.showAiWorkshopOffering ? (
+      <a class="button gold" href="mailto:jgsteeler@gmail.com?subject=AI%20Engineering%20Mentorship%20Workshop">Book Team Workshop ($3,500)</a>
+    ) : (
+      <a class="button ghost" href={config.linkedInUrl} target="_blank" rel="noopener">Follow on LinkedIn ↗</a>
+    )}
   </div>
 </section>
