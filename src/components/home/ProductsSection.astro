@@ -2,14 +2,14 @@
 import { config } from "../../config/features";
 ---
 <section id="capabilities" class="reveal delay-2">
-  <p class="eyebrow">Enterprise Capabilities & Practice Areas</p>
-  <h2 style="margin-top: 0.5rem; font-size: clamp(1.6rem, 3.2vw, 2.4rem);">Architectural Consulting & Audit Defense</h2>
+  <p class="eyebrow">High-Impact Advisory & Consulting</p>
+  <h2 style="margin-top: 0.5rem; font-size: clamp(1.6rem, 3.2vw, 2.4rem);">Immediate Revenue & Architecture Wins</h2>
   <p class="lead" style="margin-top: 0.8rem; margin-bottom: 1.6rem;">
-    Specialized engineering advisory and implementation designed for organizations that cannot afford downtime, security breaches, or regulatory failure.
+    Specialized enterprise consulting designed for engineering leadership that cannot afford downtime, security breaches, or regulatory failure. Engage directly on C2C or fixed-scope contracts.
   </p>
 
   <div class="grid">
-    <!-- Capability / Package 1: AppSec -->
+    <!-- Pillar 1: AppSec -->
     <article class="card">
       <p class="eyebrow">Application Security</p>
       <h3>Pen-Test & AppSec Audit Defense</h3>
@@ -18,57 +18,57 @@ import { config } from "../../config/features";
         <div class="rate-note">10–15 Hr Focused Sprint • 2-Wk Turnaround</div>
       )}
       <p>
-        Full audit of external API Gateways, OAuth 2.0 / Okta token lifecycles, and OWASP API Top 10 threat modeling. Concrete remediation snippets to eliminate findings before external auditors arrive.
+        Full audit of external API Gateways, OAuth 2.0 / Okta CIAM token lifecycles, and OWASP API Top 10 threat modeling. Concrete remediation snippets to eliminate findings before external auditors arrive.
       </p>
       <div class="badge-row">
         <span class="badge">OWASP Top 10</span>
         <span class="badge">OAuth 2.0 PKCE</span>
-        <span class="badge">Audit Readiness</span>
+        <span class="badge">Zero Findings</span>
       </div>
       {config.flags.showPenTestSprintPricing && (
         <a class="button ghost" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=Pen-Test%20Readiness%20Audit%20Inquiry">Book Audit Sprint</a>
       )}
     </article>
 
-    <!-- Capability / Package 2: Systems Architecture -->
+    <!-- Pillar 2: Systems Architecture (Featured) -->
     <article class={`card ${config.flags.showFractionalRetainer ? 'featured' : ''}`}>
       <p class="eyebrow" style="color: var(--royals-gold);">Systems Architecture</p>
-      <h3>Enterprise Solutions Architecture</h3>
+      <h3>Architect Sounding Board & Advisory</h3>
       {config.flags.showFractionalRetainer && (
         <div class="price-tag">$125 – $150 <span style="font-size: 1rem; font-weight: 500;">/ hr</span></div>
         <div class="rate-note">5 to 10 Hours / Week • Monthly Retainer</div>
       )}
       <p>
-        Architecting decoupled, observable distributed backends using Clean/Onion Architecture, CQRS, and Event Sourcing. Technical sounding board for engineering leaders navigating legacy modernizations.
+        Direct architectural sounding board for Engineering Directors and VPs. Decoupling legacy monoliths, cross-project PR reviews enforcing Onion Architecture and CQRS, and unblocking critical technical decisions.
       </p>
       <div class="badge-row">
         <span class="badge">Onion Architecture</span>
-        <span class="badge">CQRS</span>
-        <span class="badge">Distributed State</span>
+        <span class="badge">CQRS & Events</span>
+        <span class="badge">VP / Director Advisory</span>
       </div>
       {config.flags.showFractionalRetainer && (
         <a class="button gold" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=Fractional%20Architect%20Retainer%20Inquiry">Retain Fractional Advisory</a>
       )}
     </article>
 
-    <!-- Capability / Package 3: Cloud Gateways -->
+    <!-- Pillar 3: AI Mentorship & Enablement -->
     <article class="card">
-      <p class="eyebrow">Cloud Modernization</p>
-      <h3>API Gateways & Cloud Infrastructure</h3>
-      {config.flags.showCloudMigrationPackages && (
-        <div class="price-tag">Project Milestone</div>
-        <div class="rate-note">Azure APIM • AWS API Gateway • ARO</div>
+      <p class="eyebrow">Engineering Leadership & AI</p>
+      <h3>"Vibe to Enterprise" AI Workshop</h3>
+      {config.flags.showAiWorkshopOffering && (
+        <div class="price-tag">$3,500 – $4,500</div>
+        <div class="rate-note">Half-Day Intensive • Team Playbooks</div>
       )}
       <p>
-        Architecting distributed API gateways, mTLS, rate limiting, and developer self-service onboarding portals that compress enterprise security onboarding cycles from weeks to hours.
+        Interactive training for developer teams adopting Copilot and Cursor. Coaching engineers to prompt AI as an architectural reviewer and systems thinker for SOLID compliance rather than generating isolated, brittle "vibe code."
       </p>
       <div class="badge-row">
-        <span class="badge">Azure APIM</span>
-        <span class="badge">AWS Gateway</span>
-        <span class="badge">Terraform IaC</span>
+        <span class="badge">GitHub Copilot</span>
+        <span class="badge">SOLID Governance</span>
+        <span class="badge">Diagnostic Mobs</span>
       </div>
-      {config.flags.showCloudMigrationPackages && (
-        <a class="button ghost" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=Cloud%20Gateway%20Modernization%20Inquiry">Discuss Modernization</a>
+      {config.flags.showAiWorkshopOffering && (
+        <a class="button ghost" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=AI%20Engineering%20Mentorship%20Workshop">Schedule Team Workshop</a>
       )}
     </article>
   </div>
