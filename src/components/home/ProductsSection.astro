@@ -13,8 +13,10 @@ import { config } from "../../config/features";
     <article class="card">
       <p class="eyebrow">Application Security</p>
       <h3>Pen-Test & AppSec Audit Defense</h3>
-      <div class="price-tag">$3,500 – $5,000</div>
-      <div class="rate-note">10–15 Hr Focused Sprint • 2-Wk Turnaround</div>
+      {config.flags.showPenTestSprintPricing && (
+        <div class="price-tag">$3,500 – $5,000</div>
+        <div class="rate-note">10–15 Hr Focused Sprint • 2-Wk Turnaround</div>
+      )}
       <p>
         Full audit of external API Gateways, OAuth 2.0 / Okta CIAM token lifecycles, and OWASP API Top 10 threat modeling. Concrete remediation snippets to eliminate findings before external auditors arrive.
       </p>
@@ -23,15 +25,19 @@ import { config } from "../../config/features";
         <span class="badge">OAuth 2.0 PKCE</span>
         <span class="badge">Zero Findings</span>
       </div>
-      <a class="button solid" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=Pen-Test%20Readiness%20Audit%20Inquiry">Book Audit Sprint</a>
+      {config.flags.showPenTestSprintPricing && (
+        <a class="button ghost" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=Pen-Test%20Readiness%20Audit%20Inquiry">Book Audit Sprint</a>
+      )}
     </article>
 
     <!-- Pillar 2: Systems Architecture (Featured) -->
-    <article class="card featured">
+    <article class={`card ${config.flags.showFractionalRetainer ? 'featured' : ''}`}>
       <p class="eyebrow" style="color: var(--royals-gold);">Systems Architecture</p>
       <h3>Architect Sounding Board & Advisory</h3>
-      <div class="price-tag">$125 – $150 <span style="font-size: 1rem; font-weight: 500;">/ hr</span></div>
-      <div class="rate-note">5 to 10 Hours / Week • Monthly Retainer</div>
+      {config.flags.showFractionalRetainer && (
+        <div class="price-tag">$125 – $150 <span style="font-size: 1rem; font-weight: 500;">/ hr</span></div>
+        <div class="rate-note">5 to 10 Hours / Week • Monthly Retainer</div>
+      )}
       <p>
         Direct architectural sounding board for Engineering Directors and VPs. Decoupling legacy monoliths, cross-project PR reviews enforcing Onion Architecture and CQRS, and unblocking critical technical decisions.
       </p>
@@ -40,15 +46,19 @@ import { config } from "../../config/features";
         <span class="badge">CQRS & Events</span>
         <span class="badge">VP / Director Advisory</span>
       </div>
-      <a class="button gold" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=Fractional%20Architect%20Retainer%20Inquiry">Retain Fractional Advisory</a>
+      {config.flags.showFractionalRetainer && (
+        <a class="button gold" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=Fractional%20Architect%20Retainer%20Inquiry">Retain Fractional Advisory</a>
+      )}
     </article>
 
     <!-- Pillar 3: AI Mentorship & Enablement -->
     <article class="card">
       <p class="eyebrow">Engineering Leadership & AI</p>
       <h3>"Vibe to Enterprise" AI Workshop</h3>
-      <div class="price-tag">$3,500 – $4,500</div>
-      <div class="rate-note">Half-Day Intensive • Team Playbooks</div>
+      {config.flags.showAiWorkshopOffering && (
+        <div class="price-tag">$3,500 – $4,500</div>
+        <div class="rate-note">Half-Day Intensive • Team Playbooks</div>
+      )}
       <p>
         Interactive training for developer teams adopting Copilot and Cursor. Coaching engineers to prompt AI as an architectural reviewer and systems thinker for SOLID compliance rather than generating isolated, brittle "vibe code."
       </p>
@@ -57,7 +67,9 @@ import { config } from "../../config/features";
         <span class="badge">SOLID Governance</span>
         <span class="badge">Diagnostic Mobs</span>
       </div>
-      <a class="button solid" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=AI%20Engineering%20Mentorship%20Workshop">Schedule Team Workshop</a>
+      {config.flags.showAiWorkshopOffering && (
+        <a class="button ghost" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=AI%20Engineering%20Mentorship%20Workshop">Schedule Team Workshop</a>
+      )}
     </article>
   </div>
 </section>

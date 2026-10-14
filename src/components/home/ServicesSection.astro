@@ -1,4 +1,5 @@
 ---
+import { config } from "../../config/features";
 ---
 <section id="platforms" class="panel reveal delay-3">
   <p class="eyebrow">Production Proofs & Testbeds</p>
@@ -8,33 +9,37 @@
   </p>
 
   <div class="grid">
-    <article class="card">
-      <p class="eyebrow">Architectural Proof of Execution</p>
-      <h3>Divergent Flow (Live Testbed)</h3>
-      <p>
-        A live, deployed production testbed demonstrating full-stack architecture: a responsive, reactive React front end paired with a modern .NET / event-driven microservices back end. Serves as an architectural proving ground for decoupled domain events, reactive state workflows, and candidate client integration for the Divergent platform.
-      </p>
-      <div class="badge-row">
-        <span class="badge">React & TypeScript</span>
-        <span class="badge">Modern .NET Back End</span>
-        <span class="badge">Event-Driven CQRS</span>
-      </div>
-      <a class="button ghost" style="margin-top: 1rem;" href="https://getdivergentflow.com" target="_blank" rel="noopener">Inspect Live Architecture ↗</a>
-    </article>
+    {config.flags.showDivergentFlowLinks && (
+      <article class="card">
+        <p class="eyebrow">Architectural Proof of Execution</p>
+        <h3>Divergent Flow (Live Testbed)</h3>
+        <p>
+          A live, deployed production testbed demonstrating full-stack architecture: a responsive, reactive React front end paired with a modern .NET / event-driven microservices back end. Serves as an architectural proving ground for decoupled domain events, reactive state workflows, and candidate client integration for the Divergent platform.
+        </p>
+        <div class="badge-row">
+          <span class="badge">React & TypeScript</span>
+          <span class="badge">Modern .NET Back End</span>
+          <span class="badge">Event-Driven CQRS</span>
+        </div>
+        <a class="button ghost" style="margin-top: 1rem;" href="https://getdivergentflow.com" target="_blank" rel="noopener">Inspect Live Architecture ↗</a>
+      </article>
+    )}
 
-    <article class="card">
-      <p class="eyebrow">Operational Testbed</p>
-      <h3>Shop Workflow & Field Proving Ground</h3>
-      <p>
-        A domain-driven 3-entity workflow utility (Jobs, Customers, Equipment) tested under live commercial shop conditions at Gibson Service Company to validate mobile usability, offline synchronization, and resilient operational data flows.
-      </p>
-      <div class="badge-row">
-        <span class="badge">Kanban State Machine</span>
-        <span class="badge">Field Operations</span>
-        <span class="badge">Domain-Driven Design</span>
-      </div>
-      <a class="button ghost" style="margin-top: 1rem;" href="mailto:jgsteeler@gmail.com?subject=Shop%20App%20POC%20Inquiry">Request POC Overview</a>
-    </article>
+    {config.flags.showShopAppShowcase && (
+      <article class="card">
+        <p class="eyebrow">Operational Testbed</p>
+        <h3>Shop Workflow & Field Proving Ground</h3>
+        <p>
+          A domain-driven 3-entity workflow utility (Jobs, Customers, Equipment) tested under live commercial shop conditions at Gibson Service Company to validate mobile usability, offline synchronization, and resilient operational data flows.
+        </p>
+        <div class="badge-row">
+          <span class="badge">Kanban State Machine</span>
+          <span class="badge">Field Operations</span>
+          <span class="badge">Domain-Driven Design</span>
+        </div>
+        <a class="button ghost" style="margin-top: 1rem;" href="mailto:jgsteeler@gmail.com?subject=Shop%20App%20POC%20Inquiry">Request POC Overview</a>
+      </article>
+    )}
   </div>
 
   <div style="margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--border-color); font-size: 0.88rem; color: var(--text-dim); font-style: italic;">
