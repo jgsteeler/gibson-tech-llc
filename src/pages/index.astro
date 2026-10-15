@@ -2,7 +2,6 @@
 import "../styles/home.css";
 import Topbar from "../components/home/Topbar.astro";
 import HeroSection from "../components/home/HeroSection.astro";
-import PlatformSection from "../components/home/PlatformSection.astro";
 import ProductsSection from "../components/home/ProductsSection.astro";
 import ConsultingCalloutSection from "../components/home/ConsultingCalloutSection.astro";
 import ServicesSection from "../components/home/ServicesSection.astro";
@@ -10,9 +9,9 @@ import AboutSection from "../components/home/AboutSection.astro";
 import SiteFooter from "../components/home/SiteFooter.astro";
 import SiteHead from "../components/home/SiteHead.astro";
 
-const pageTitle = "Gibson Tech Works | Enterprise Software Architecture & Consulting";
+const pageTitle = "Gibson Tech | Architecture & Application Security Advisory";
 const pageDescription =
-  "The technology just works—because good architecture works. Gibson Tech delivers enterprise systems architecture, OAuth/Okta CIAM audit defense, and pragmatic AI engineering mentorship.";
+  "Principal architecture and application security advisory for teams modernizing distributed systems, identity, and cloud platforms.";
 ---
 
 <html lang="en">
@@ -26,11 +25,10 @@ const pageDescription =
 
     <main class="shell">
       <HeroSection />
-      <PlatformSection />
       <ProductsSection />
       <ConsultingCalloutSection />
-      <ServicesSection />
       <AboutSection />
+      <ServicesSection />
     </main>
 
     <SiteFooter />

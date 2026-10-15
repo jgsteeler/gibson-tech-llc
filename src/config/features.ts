@@ -18,8 +18,8 @@ export interface FeatureFlags {
   showCloudMigrationPackages: boolean; // Flip on detailed gateway/ARO modernization scopes
   
   // Products & Portfolio
-  showDivergentFlowLinks: boolean;     // Link directly to live getdivergentflow.com
-  showShopAppShowcase: boolean;        // Showcase the upcoming equipment shop Kanban app
+  showDivergentFlowLinks: boolean;     // Show Divergent Flow portfolio links
+  showShopAppShowcase: boolean;        // Show WrenchQ portfolio links
   showInteractiveCalculator: boolean;  // Show interactive budget/hours estimator widget
 }
 
@@ -28,6 +28,8 @@ export interface AppConfig {
   dba: string;
   linkedInUrl: string;
   contactEmail: string;
+  divergentFlowUrl: string;
+  wrenchqUrl: string;
   flags: FeatureFlags;
 }
 
@@ -39,6 +41,8 @@ export const config: AppConfig = {
   dba: "GTech",
   linkedInUrl: "https://www.linkedin.com/company/gibson-tech-llc/",
   contactEmail: "jgsteeler@gmail.com",
+  divergentFlowUrl: import.meta.env.VITE_DIVERGENT_FLOW_URL ?? "https://getdivergentflow.com",
+  wrenchqUrl: import.meta.env.VITE_WRENCHQ_URL ?? "https://track.gibsonservice.co/",
   flags: {
     showDetailedHeroCta: false,        // Vanilla mode: soft discovery buttons only
     showDirectEmailCapture: false,     // Vanilla mode: mailto / LinkedIn link instead of active RFP form
@@ -46,8 +50,8 @@ export const config: AppConfig = {
     showFractionalRetainer: false,     // Vanilla mode: overview of capabilities without pricing cards
     showAiWorkshopOffering: false,     // Vanilla mode: overview of leadership without pricing cards
     showCloudMigrationPackages: false, // Vanilla mode: overview of architecture without pricing cards
-    showDivergentFlowLinks: true,      // Active production SaaS showcase
-    showShopAppShowcase: true,         // Active domain testbed showcase
+    showDivergentFlowLinks: true,      // Selected personal product work
+    showShopAppShowcase: true,         // WrenchQ proof of concept
     showInteractiveCalculator: false,  // Hidden in vanilla mode
   }
 };

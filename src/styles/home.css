@@ -292,35 +292,6 @@ h1 span.gold {
   max-width: 860px;
 }
 
-/* Philosophy Banner */
-.philosophy-banner {
-  border: 1px solid var(--border-color);
-  border-left: 4px solid var(--royals-gold);
-  border-radius: 6px;
-  padding: 1.8rem 2rem;
-  margin: 2rem 0;
-  background: var(--bg-surface);
-  box-shadow: var(--shadow);
-}
-
-.philosophy-text {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--text-main);
-  margin: 0;
-  font-weight: 400;
-}
-
-.philosophy-author {
-  display: block;
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--royals-gold);
-}
-
 /* Panels, Cards & Sections */
 .panel {
   border: 1px solid var(--border-color);
@@ -487,6 +458,7 @@ h1 span.gold {
 
 .footer-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 1.4rem;
 }
 
