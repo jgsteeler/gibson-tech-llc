@@ -3,13 +3,18 @@ import { config } from "../../config/features";
 ---
 <footer class="footer shell">
   <div>
-    <strong>Gibson Tech, LLC</strong> — Software Architecture • Application Security • Engineering Solutions
+    <strong>Gibson Tech</strong> — Software Architecture • Application Security • Engineering Solutions
     <div style="font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.75;">
-      © 2026 Gibson Tech, LLC. Topeka, Kansas. Registered Kansas Domestic Limited Liability Company.
+      © 2026 Gibson Tech. Topeka, Kansas.
     </div>
   </div>
   <div class="footer-links">
-    <a href="https://getdivergentflow.com" target="_blank" rel="noopener">Divergent Flow</a>
+    {config.flags.showDivergentFlowLinks && (
+      <a href={config.divergentFlowUrl} target="_blank" rel="noopener">Divergent Flow</a>
+    )}
+    {config.flags.showShopAppShowcase && (
+      <a href={config.wrenchqUrl} target="_blank" rel="noopener">WrenchQ</a>
+    )}
     <a href="https://gibsonsvc.com" target="_blank" rel="noopener">Gibson Service Co</a>
     <a href={config.linkedInUrl} target="_blank" rel="noopener">LinkedIn</a>
     <a href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>

@@ -1,10 +1,17 @@
 # Gibson Tech (gibsontechworks.com)
 
-High-stature Astro static marketing and discovery site for **Gibson Tech, LLC**, engineered to attract high-value enterprise consulting, AppSec audit defense, and fractional systems architecture engagements.
+Static Astro consulting site for Gibson Tech, focused on architecture, application security,
+and engineering advisory.
 
 ---
 
 ## 1. Core Positioning & Immediate Revenue Strategy
+- Legal name: Gibson Tech, LLC
+- Brand name: Gibson Tech / G Tech
+- Primary purpose: Generate consulting and contracting leads
+- Personal product work: Divergent Flow and WrenchQ demonstrate applied architecture and
+  full-stack development without taking focus from consulting
+- Pricing and direct engagement offers remain behind disabled feature flags
 
 This site serves as the executive front door for Gibson Tech's consulting and advisory offerings. Its current objective is **not** to market or sell early-stage SaaS applications, shop tools, or developer frameworks, but to establish immediate credibility and drive high-margin Corp-to-Corp (C2C) advisory and contract architecture revenue:
 
@@ -63,3 +70,33 @@ npm run dev
 npm run build
 npm run preview
 ```
+
+## Deployment
+
+Netlify config is in `netlify.toml`.
+
+- Build command: `npm run build`
+- Publish directory: `dist`
+
+### Product URLs
+
+Product links are configured centrally in `src/config/features.ts` using build-time Vite
+environment variables:
+
+- `VITE_DIVERGENT_FLOW_URL`: `https://getdivergentflow.com`
+- `VITE_WRENCHQ_URL`: `https://track.gibsonservice.co/`
+
+The current values are set in `[build.environment]` in `netlify.toml`. For local overrides,
+set these variables in an uncommitted `.env.local` file or in the shell. Local development
+otherwise uses the same current URLs as defaults.
+
+These are public URLs, not secrets. Changing them requires a rebuild/deploy. When moving
+configuration to the Netlify dashboard, remove the corresponding TOML entries so they do
+not override dashboard values. Card and footer links use the same configuration and respect
+the existing `showDivergentFlowLinks` and `showShopAppShowcase` flags.
+
+## Key Files
+
+- `src/pages/index.astro`: Main homepage content and styling
+- `netlify.toml`: Netlify deployment settings
+- `.github/copilot-instructions.md`: Workspace execution checklist and setup tracking
