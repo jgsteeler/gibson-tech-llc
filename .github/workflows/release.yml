@@ -77,7 +77,6 @@ jobs:
           npm exec --yes --package=netlify-cli@27.12.1 -- netlify deploy \
             --no-build \
             --prod \
-            --context production \
             --dir dist \
             --site "$NETLIFY_SITE_ID" \
             --message "Release $RELEASE_TAG"
