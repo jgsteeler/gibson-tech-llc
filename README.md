@@ -53,7 +53,7 @@ The website architecture is intentionally kept minimal and rock-solid:
 * **Static Architecture:** Built with [Astro](https://astro.build/) using component-driven sections in `src/components/home/`.
 * **Styling:** Scoped CSS with Kansas City Royals heritage palette variables and local storage theme toggle (`src/styles/home.css`).
 * **Deployment:** GitHub Actions builds released versions using `netlify.toml` and uploads `dist` to [Netlify](https://www.netlify.com/). Production deploys are gated on Release Please publishing a release.
-* **Feature Flag Governance:** Centralized in `src/config/features.ts`. All pricing tags ($3.5k–$5k sprint, $125–$150/hr retainer, $3,500 workshop) and direct booking CTAs are strictly guarded behind feature flags, keeping the live site in clean vanilla discovery mode until explicitly flipped.
+* **Feature Flag Governance:** Centralized in `src/config/features.ts`. Pricing tags and direct booking CTAs remain off by default. Portfolio projects and the small-business consulting page are also disabled by default; build-time flags can publish each independently when ready.
 
 ---
 
@@ -83,13 +83,21 @@ npm run test:e2e
 
 Playwright starts and stops its own local production preview on port 4337. Tests cover
 consulting messaging, section navigation, persisted themes, disabled pricing/booking offers,
-portfolio image loading and links, browser errors, and horizontal overflow. Each scenario
-runs in desktop and mobile Chromium. Google Fonts requests are stubbed to keep these smoke
-tests independent of an external font service; they are not visual/font regression tests.
+feature-flagged portfolio and small-business surfaces, crawl metadata, browser errors, and
+horizontal overflow. Each scenario runs in desktop and mobile Chromium. Google Fonts requests
+are stubbed to keep these smoke tests independent of an external font service; they are not
+visual/font regression tests.
 
-When overriding product URLs, pass the same `VITE_DIVERGENT_FLOW_URL` and `VITE_WRENCHQ_URL`
-values to both the build and test commands. The suite deliberately asserts the current
-discovery-mode defaults; update the relevant assertions when intentionally publishing offers.
+When overriding product URLs or enabling optional sections, pass the same environment values
+to both the build and test commands. Optional sections default to off:
+
+- `VITE_SHOW_DIVERGENT_FLOW_SHOWCASE=true`: show Divergent Flow in selected work, footer, and `llms.txt`.
+- `VITE_SHOW_WRENCHQ_SHOWCASE=true`: show WrenchQ in selected work, footer, and `llms.txt`.
+- `VITE_SHOW_SMALL_BUSINESS_CONSULTING=true`: generate `/consulting/` and include it in the sitemap.
+
+Product URLs can be set with `VITE_DIVERGENT_FLOW_URL` and `VITE_WRENCHQ_URL`. The test suite
+checks the same flags used to create the production build, so set them consistently for both
+commands when testing an enabled surface.
 
 PR validation and release validation run the suite after building, without a Netlify
 deployment. Browser reports, failure screenshots, and traces are retained as Actions
@@ -205,6 +213,9 @@ environment variables:
 
 - `VITE_DIVERGENT_FLOW_URL`: `https://getdivergentflow.com`
 - `VITE_WRENCHQ_URL`: `https://track.gibsonservice.co/`
+- `VITE_SHOW_DIVERGENT_FLOW_SHOWCASE`: off unless set to `true`
+- `VITE_SHOW_WRENCHQ_SHOWCASE`: off unless set to `true`
+- `VITE_SHOW_SMALL_BUSINESS_CONSULTING`: off unless set to `true`
 
 The current values are set in `[build.environment]` in `netlify.toml`. For local overrides,
 set these variables in an uncommitted `.env.local` file or in the shell. Local development
@@ -212,8 +223,9 @@ otherwise uses the same current URLs as defaults.
 
 These are public URLs, not secrets. Changing them requires a rebuild/deploy. When moving
 configuration to the Netlify dashboard, remove the corresponding TOML entries so they do
-not override dashboard values. Card and footer links use the same configuration and respect
-the existing `showDivergentFlowLinks` and `showShopAppShowcase` flags.
+not override dashboard values. Showcase flags only affect generated content; changing one
+requires a new build and deployment. The small-business page is omitted from the static output
+and sitemap unless its flag is enabled.
 
 ## Key Files
 

@@ -18,8 +18,9 @@ export interface FeatureFlags {
   showCloudMigrationPackages: boolean; // Flip on detailed gateway/ARO modernization scopes
   
   // Products & Portfolio
-  showDivergentFlowLinks: boolean;     // Show Divergent Flow portfolio links
-  showShopAppShowcase: boolean;        // Show WrenchQ portfolio links
+  showDivergentFlowShowcase: boolean;  // Show Divergent Flow portfolio links
+  showWrenchQShowcase: boolean;        // Show WrenchQ portfolio links
+  showSmallBusinessConsulting: boolean; // Publish the small-business consulting page
   showInteractiveCalculator: boolean;  // Show interactive budget/hours estimator widget
 }
 
@@ -33,9 +34,11 @@ export interface AppConfig {
   flags: FeatureFlags;
 }
 
+const isBuildFlagEnabled = (value: string | undefined): boolean => value === "true";
+
 // Default Configuration: Clean, vanilla, high-stature business landing page
 // All aggressive immediate "book me right now" CTAs and deep pricing cards are kept OFF by default.
-// Flip any flag to true whenever you are ready!
+// Optional portfolio and small-business surfaces can be enabled with build-time VITE_SHOW_* flags.
 export const config: AppConfig = {
   companyName: "Gibson Tech, LLC",
   dba: "GTech",
@@ -50,8 +53,11 @@ export const config: AppConfig = {
     showFractionalRetainer: false,     // Vanilla mode: overview of capabilities without pricing cards
     showAiWorkshopOffering: false,     // Vanilla mode: overview of leadership without pricing cards
     showCloudMigrationPackages: false, // Vanilla mode: overview of architecture without pricing cards
-    showDivergentFlowLinks: true,      // Selected personal product work
-    showShopAppShowcase: true,         // WrenchQ proof of concept
+    showDivergentFlowShowcase: isBuildFlagEnabled(import.meta.env.VITE_SHOW_DIVERGENT_FLOW_SHOWCASE),
+    showWrenchQShowcase: isBuildFlagEnabled(import.meta.env.VITE_SHOW_WRENCHQ_SHOWCASE),
+    showSmallBusinessConsulting: isBuildFlagEnabled(
+      import.meta.env.VITE_SHOW_SMALL_BUSINESS_CONSULTING,
+    ),
     showInteractiveCalculator: false,  // Hidden in vanilla mode
   }
 };

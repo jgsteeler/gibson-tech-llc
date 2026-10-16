@@ -1,10 +1,15 @@
 ---
 import SiteHead from "../components/home/SiteHead.astro";
+import { config } from "../config/features";
 import "../styles/home.css";
 
-const pageTitle = "Gibson Tech | Consulting";
+export function getStaticPaths() {
+  return config.flags.showSmallBusinessConsulting ? [{ params: { slug: "consulting" } }] : [];
+}
+
+const pageTitle = "Custom Software & Workflow Automation | Gibson Tech";
 const pageDescription =
-  "Rapid application development and workflow automation for local businesses, delivered with the same engineering discipline behind the Divergent Engine.";
+  "Custom web apps and workflow automation that reduce manual work for local businesses, delivered with practical architecture and short, validated milestones.";
 ---
 
 <html lang="en">
@@ -19,8 +24,8 @@ const pageDescription =
       <p class="brand">G Tech</p>
       <nav>
         <a href="/">Home</a>
-        <a href="/#platform">Platform</a>
-        <a href="/#services">Services</a>
+        <a href="/#work">Selected Work</a>
+        <a href="/#capabilities">Capabilities</a>
       </nav>
     </header>
 
@@ -34,8 +39,8 @@ const pageDescription =
           model.
         </p>
         <div class="actions">
-          <a class="button solid" href="/#consulting">Start a Project Conversation</a>
-          <a class="button ghost" href="/#products">See Platform Work</a>
+          <a class="button solid" href="/#capabilities">Explore Advisory Capabilities</a>
+          <a class="button ghost" href="/#work">See Selected Work</a>
         </div>
       </section>
 
@@ -96,7 +101,7 @@ const pageDescription =
           maintainability later.
         </p>
         <div class="actions">
-          <a class="button ghost" href="/#consulting">Discuss Your Workflow</a>
+          <a class="button ghost" href="/#capabilities">Explore Advisory Capabilities</a>
         </div>
       </section>
     </main>

@@ -27,7 +27,9 @@ import { config } from "../../config/features";
   <nav>
     <a href="#capabilities">Consulting</a>
     <a href="#leadership">Mentorship</a>
-    <a href="#work">Selected Work</a>
+    {(config.flags.showDivergentFlowShowcase || config.flags.showWrenchQShowcase) && (
+      <a href="#work">Selected Work</a>
+    )}
     <a href="#about">About</a>
     <a href={config.linkedInUrl} target="_blank" rel="noopener" class="nav-linkedin-link">
       LinkedIn ↗

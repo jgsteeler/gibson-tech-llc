@@ -5,6 +5,98 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const siteUrl = "https://gibsontechworks.com";
+const pageUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const socialImageUrl = new URL("/assets/banner.jpg", siteUrl).toString();
+const organizationId = `${siteUrl}/#organization`;
+const founderId = `${siteUrl}/#founder`;
+const websiteId = `${siteUrl}/#website`;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": organizationId,
+      name: "Gibson Tech, LLC",
+      url: siteUrl,
+      logo: `${siteUrl}/assets/logo_icon.jpg`,
+      description:
+        "Enterprise systems architecture, application security, cloud modernization, and engineering leadership.",
+      founder: { "@id": founderId },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Topeka",
+        addressRegion: "KS",
+        addressCountry: "US",
+      },
+      areaServed: { "@type": "Country", name: "United States" },
+      sameAs: ["https://www.linkedin.com/company/gibson-tech-llc/"],
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "business inquiries",
+        email: "jgsteeler@gmail.com",
+      },
+      makesOffer: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Application Security & Audit Readiness",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Principal Architecture Advisory",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "AI-Era Engineering Mentorship",
+          },
+        },
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": founderId,
+      name: "Johnny Gibson",
+      jobTitle: "Principal Software Architect and Lead Application Security Engineer",
+      worksFor: { "@id": organizationId },
+      sameAs: ["https://www.linkedin.com/in/johnnypgibson"],
+      knowsAbout: [
+        "Distributed systems architecture",
+        "Application security",
+        "OAuth 2.0 PKCE",
+        "Okta CIAM",
+        "OWASP API risks",
+        "Clean and Onion Architecture",
+        "CQRS and event-driven systems",
+        "Cloud modernization",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: siteUrl,
+      name: "Gibson Tech",
+      publisher: { "@id": organizationId },
+    },
+    {
+      "@type": "WebPage",
+      "@id": pageUrl,
+      url: pageUrl,
+      name: title,
+      description,
+      isPartOf: { "@id": websiteId },
+      about: { "@id": organizationId },
+    },
+  ],
+};
 ---
 
 <meta charset="utf-8" />
@@ -14,6 +106,20 @@ const { title, description } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
 <meta name="description" content={description} />
+<link rel="canonical" href={pageUrl} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Gibson Tech" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={pageUrl} />
+<meta property="og:image" content={socialImageUrl} />
+<meta property="og:image:alt" content="Gibson Tech, LLC" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImageUrl} />
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
