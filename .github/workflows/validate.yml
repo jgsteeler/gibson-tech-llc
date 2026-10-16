@@ -27,6 +27,20 @@ jobs:
         run: npm audit --audit-level=high
       - name: Build with production configuration
         run: npm exec --yes --package=netlify-cli@27.12.1 -- netlify build --offline --context production
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run browser smoke tests
+        run: npm run test:e2e
+      - name: Preserve browser test results
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-results
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Preserve the validated site
         uses: actions/upload-artifact@v4
         with:

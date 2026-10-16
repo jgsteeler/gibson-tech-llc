@@ -71,6 +71,31 @@ npm run build
 npm run preview
 ```
 
+### Browser smoke tests
+
+Install Chromium once, then test a fresh production build:
+
+```sh
+npx playwright install chromium
+npm run build
+npm run test:e2e
+```
+
+Playwright starts and stops its own local production preview on port 4337. Tests cover
+consulting messaging, section navigation, persisted themes, disabled pricing/booking offers,
+portfolio image loading and links, browser errors, and horizontal overflow. Each scenario
+runs in desktop and mobile Chromium. Google Fonts requests are stubbed to keep these smoke
+tests independent of an external font service; they are not visual/font regression tests.
+
+When overriding product URLs, pass the same `VITE_DIVERGENT_FLOW_URL` and `VITE_WRENCHQ_URL`
+values to both the build and test commands. The suite deliberately asserts the current
+discovery-mode defaults; update the relevant assertions when intentionally publishing offers.
+
+PR validation and release validation run the suite after building, without a Netlify
+deployment. Browser reports, failure screenshots, and traces are retained as Actions
+artifacts for seven days. Locally, use `npx playwright show-report` to inspect the HTML report.
+The existing dependency audit runs first and can block the job before browser tests execute.
+
 ## Deployment
 
 Netlify config is in `netlify.toml`.
@@ -121,7 +146,8 @@ Netlify hosting/deploy usage still applies, as do GitHub Actions usage limits.
 The [validation workflow](.github/workflows/validate.yml) runs three blocking jobs:
 
 - **Build:** installs locked dependencies, runs `npm audit --audit-level=high`, and produces
-  the static site artifact. High/critical dependency advisories and audit errors block release.
+  the static site artifact after desktop/mobile Playwright smoke tests pass. High/critical
+  dependency advisories, audit errors, and browser test failures block release.
   Lower-severity advisories remain visible for triage; development dependencies are included.
 - **SAST:** Semgrep Community Edition with `p/default`, `--error`, and `--strict`. Findings
   or scanner errors fail the job. Rules are fetched from the registry; scanning runs locally
