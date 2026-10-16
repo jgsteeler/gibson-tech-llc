@@ -1,0 +1,83 @@
+name: Release and deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-production
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate release candidate
+    uses: ./.github/workflows/validate.yml
+
+  release:
+    name: Prepare or publish release
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - name: Run Release Please
+        id: release
+        uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  deploy:
+    name: Deploy released site to Netlify
+    needs: release
+    if: needs.release.outputs.release_created == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      RELEASE_TAG: ${{ needs.release.outputs.tag_name }}
+    steps:
+      - name: Check deployment credentials
+        run: |
+          if [ -z "$NETLIFY_AUTH_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then
+            echo "::error::Configure NETLIFY_AUTH_TOKEN and NETLIFY_SITE_ID repository secrets before releasing."
+            exit 1
+          fi
+
+      - name: Check out the released version
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ needs.release.outputs.tag_name }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Download the validated site
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: validated-site
+          path: dist/
+
+      - name: Upload the built site
+        run: |
+          npm exec --yes --package=netlify-cli@27.12.1 -- netlify deploy \
+            --no-build \
+            --prod \
+            --context production \
+            --dir dist \
+            --site "$NETLIFY_SITE_ID" \
+            --message "Release $RELEASE_TAG"
