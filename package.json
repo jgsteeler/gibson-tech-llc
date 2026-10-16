@@ -1,7 +1,7 @@
 {
   "name": "gibson-tech-site",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Gibson Tech marketing website built with Astro",
   "scripts": {
