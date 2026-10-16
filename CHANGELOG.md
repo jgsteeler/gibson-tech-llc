@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/jgsteeler/gibson-tech-llc/compare/v1.0.0...v1.0.1) (2026-10-16)
+
+
+### Bug Fixes
+
+* bump typescript from 5.9.3 to 7.0.2 ([bdeb7f2](https://github.com/jgsteeler/gibson-tech-llc/commit/bdeb7f25e76be3f32343a303874415afdfc6291a))
+
 ## 1.0.0 (2026-10-16)
 
 
