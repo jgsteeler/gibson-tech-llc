@@ -1,9 +1,6 @@
 /**
- * Poor Man's Centralized App Config & Feature Flag Provider
- * Architecture pattern designed to federate directly into Azure App Configuration / Key Vault later.
- * 
- * In local/vanilla mode: Reads deterministic defaults and environment overrides.
- * In production mode: Can bind to Netlify environment variables or a remote config JSON.
+ * Build-time application configuration for the static marketing site.
+ * Feature flags are public build inputs, not secrets or runtime controls.
  */
 
 export interface FeatureFlags {
@@ -18,8 +15,9 @@ export interface FeatureFlags {
   showCloudMigrationPackages: boolean; // Flip on detailed gateway/ARO modernization scopes
   
   // Products & Portfolio
-  showDivergentFlowLinks: boolean;     // Show Divergent Flow portfolio links
-  showShopAppShowcase: boolean;        // Show WrenchQ portfolio links
+  showDivergentFlowShowcase: boolean;  // Show Divergent Flow portfolio links
+  showWrenchQShowcase: boolean;        // Show WrenchQ portfolio links
+  showSmallBusinessConsulting: boolean; // Publish the small-business consulting page
   showInteractiveCalculator: boolean;  // Show interactive budget/hours estimator widget
 }
 
@@ -33,9 +31,10 @@ export interface AppConfig {
   flags: FeatureFlags;
 }
 
-// Default Configuration: Clean, vanilla, high-stature business landing page
-// All aggressive immediate "book me right now" CTAs and deep pricing cards are kept OFF by default.
-// Flip any flag to true whenever you are ready!
+const isBuildFlagEnabled = (value: string | undefined): boolean => value === "true";
+
+// Default Configuration: clean discovery mode. All optional flags default off.
+// Set the corresponding VITE_SHOW_* build environment variable to "true" to enable a flag.
 export const config: AppConfig = {
   companyName: "Gibson Tech, LLC",
   dba: "GTech",
@@ -44,14 +43,17 @@ export const config: AppConfig = {
   divergentFlowUrl: import.meta.env.VITE_DIVERGENT_FLOW_URL ?? "https://getdivergentflow.com",
   wrenchqUrl: import.meta.env.VITE_WRENCHQ_URL ?? "https://track.gibsonservice.co/",
   flags: {
-    showDetailedHeroCta: false,        // Vanilla mode: soft discovery buttons only
-    showDirectEmailCapture: false,     // Vanilla mode: mailto / LinkedIn link instead of active RFP form
-    showPenTestSprintPricing: false,   // Vanilla mode: overview of capabilities without pricing cards
-    showFractionalRetainer: false,     // Vanilla mode: overview of capabilities without pricing cards
-    showAiWorkshopOffering: false,     // Vanilla mode: overview of leadership without pricing cards
-    showCloudMigrationPackages: false, // Vanilla mode: overview of architecture without pricing cards
-    showDivergentFlowLinks: true,      // Selected personal product work
-    showShopAppShowcase: true,         // WrenchQ proof of concept
-    showInteractiveCalculator: false,  // Hidden in vanilla mode
+    showDetailedHeroCta: isBuildFlagEnabled(import.meta.env.VITE_SHOW_DETAILED_HERO_CTA),
+    showDirectEmailCapture: isBuildFlagEnabled(import.meta.env.VITE_SHOW_DIRECT_EMAIL_CAPTURE),
+    showPenTestSprintPricing: isBuildFlagEnabled(import.meta.env.VITE_SHOW_PEN_TEST_SPRINT_PRICING),
+    showFractionalRetainer: isBuildFlagEnabled(import.meta.env.VITE_SHOW_FRACTIONAL_RETAINER),
+    showAiWorkshopOffering: isBuildFlagEnabled(import.meta.env.VITE_SHOW_AI_WORKSHOP_OFFERING),
+    showCloudMigrationPackages: isBuildFlagEnabled(import.meta.env.VITE_SHOW_CLOUD_MIGRATION_PACKAGES),
+    showDivergentFlowShowcase: isBuildFlagEnabled(import.meta.env.VITE_SHOW_DIVERGENT_FLOW_SHOWCASE),
+    showWrenchQShowcase: isBuildFlagEnabled(import.meta.env.VITE_SHOW_WRENCHQ_SHOWCASE),
+    showSmallBusinessConsulting: isBuildFlagEnabled(
+      import.meta.env.VITE_SHOW_SMALL_BUSINESS_CONSULTING,
+    ),
+    showInteractiveCalculator: isBuildFlagEnabled(import.meta.env.VITE_SHOW_INTERACTIVE_CALCULATOR),
   }
 };
