@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/jgsteeler/gibson-tech-llc/compare/v1.0.1...v1.1.0) (2026-10-16)
+
+
+### Features
+
+* add build-time feature flags for enhanced content control and update documentation ([e639cf7](https://github.com/jgsteeler/gibson-tech-llc/commit/e639cf7d504d1a027ea7b5b7523409625924b813))
+* add SEO, GEO, and build-time feature flags ([eb8dd12](https://github.com/jgsteeler/gibson-tech-llc/commit/eb8dd124f57d403fe4062348016d3388306d028f))
+
 ## [1.0.1](https://github.com/jgsteeler/gibson-tech-llc/compare/v1.0.0...v1.0.1) (2026-10-16)
 
 
