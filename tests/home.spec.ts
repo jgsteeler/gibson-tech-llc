@@ -101,13 +101,31 @@ test('theme changes persist across reloads without horizontal overflow', async (
   }
 });
 
-test('discovery mode does not ship prices or booking offers', async ({ page }) => {
+test('commercial page content follows its build-time feature flags', async ({ page }) => {
+  const showDetailedHeroCta = process.env.VITE_SHOW_DETAILED_HERO_CTA === 'true';
+  const showPenTestPricing = process.env.VITE_SHOW_PEN_TEST_SPRINT_PRICING === 'true';
+  const showFractionalRetainer = process.env.VITE_SHOW_FRACTIONAL_RETAINER === 'true';
+  const showAiWorkshop = process.env.VITE_SHOW_AI_WORKSHOP_OFFERING === 'true';
+
   await page.goto('/');
-  await expect(page.locator('.price-tag, .rate-note')).toHaveCount(0);
-  await expect(page.getByRole('link', {
-    name: /Book Audit Sprint|Retain Fractional Advisory|Schedule Team Workshop|Explore Team Workshop|Initiate C2C Engagement/,
-  })).toHaveCount(0);
-  await expect(page.locator('body')).not.toContainText(/\$\s*\d/);
+  await expect(page.getByRole('link', { name: 'Initiate C2C Engagement' })).toHaveCount(
+    showDetailedHeroCta ? 1 : 0,
+  );
+  await expect(page.locator('.price-tag')).toHaveCount(
+    Number(showPenTestPricing) + Number(showFractionalRetainer) + Number(showAiWorkshop),
+  );
+  await expect(page.getByRole('link', { name: 'Book Audit Sprint' })).toHaveCount(
+    showPenTestPricing ? 1 : 0,
+  );
+  await expect(page.getByRole('link', { name: 'Retain Fractional Advisory' })).toHaveCount(
+    showFractionalRetainer ? 1 : 0,
+  );
+  await expect(page.getByRole('link', { name: 'Schedule Team Workshop' })).toHaveCount(
+    showAiWorkshop ? 1 : 0,
+  );
+  if (!(showPenTestPricing || showFractionalRetainer || showAiWorkshop)) {
+    await expect(page.locator('body')).not.toContainText(/\$\s*\d/);
+  }
 });
 
 test('portfolio content follows its build-time feature flags', async ({ page }) => {

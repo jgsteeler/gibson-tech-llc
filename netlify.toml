@@ -2,10 +2,6 @@
   command = "npm run build"
   publish = "dist"
 
-[build.environment]
-  VITE_DIVERGENT_FLOW_URL = "https://getdivergentflow.com"
-  VITE_WRENCHQ_URL = "https://track.gibsonservice.co/"
-
 [dev]
   command = "npm run dev"
   port = 4321

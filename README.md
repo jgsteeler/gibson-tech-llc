@@ -88,16 +88,27 @@ horizontal overflow. Each scenario runs in desktop and mobile Chromium. Google F
 are stubbed to keep these smoke tests independent of an external font service; they are not
 visual/font regression tests.
 
-When overriding product URLs or enabling optional sections, pass the same environment values
-to both the build and test commands. Optional sections default to off:
+Feature flags and optional public URLs are supplied to the GitHub Actions build from
+repository Actions variables (`Settings > Secrets and variables > Actions > Variables`).
+Only the exact value `true` enables a flag; missing, empty, or other values leave it off.
+For local builds, set the same values in `.env.local`. These values are embedded in the
+generated static site, so they are public build-time configuration—not secrets or runtime
+controls. Changes apply after rebuilding and deploying.
 
-- `VITE_SHOW_DIVERGENT_FLOW_SHOWCASE=true`: show Divergent Flow in selected work, footer, and `llms.txt`.
-- `VITE_SHOW_WRENCHQ_SHOWCASE=true`: show WrenchQ in selected work, footer, and `llms.txt`.
-- `VITE_SHOW_SMALL_BUSINESS_CONSULTING=true`: generate `/consulting/` and include it in the sitemap.
+- `VITE_SHOW_DETAILED_HERO_CTA`: show direct commercial calls to action.
+- `VITE_SHOW_DIRECT_EMAIL_CAPTURE`: enable direct email capture.
+- `VITE_SHOW_PEN_TEST_SPRINT_PRICING`: show the AppSec sprint pricing and booking CTA.
+- `VITE_SHOW_FRACTIONAL_RETAINER`: show fractional retainer pricing and CTA.
+- `VITE_SHOW_AI_WORKSHOP_OFFERING`: show the AI workshop offer and CTA.
+- `VITE_SHOW_CLOUD_MIGRATION_PACKAGES`: show detailed cloud migration packages.
+- `VITE_SHOW_DIVERGENT_FLOW_SHOWCASE`: show Divergent Flow in selected work, footer, and `llms.txt`.
+- `VITE_SHOW_WRENCHQ_SHOWCASE`: show WrenchQ in selected work, footer, and `llms.txt`.
+- `VITE_SHOW_SMALL_BUSINESS_CONSULTING`: generate `/consulting/` and include it in the sitemap.
+- `VITE_SHOW_INTERACTIVE_CALCULATOR`: show the interactive budget/hours calculator.
 
-Product URLs can be set with `VITE_DIVERGENT_FLOW_URL` and `VITE_WRENCHQ_URL`. The test suite
-checks the same flags used to create the production build, so set them consistently for both
-commands when testing an enabled surface.
+Product URLs can be set with the GitHub repository variables `VITE_DIVERGENT_FLOW_URL` and
+`VITE_WRENCHQ_URL`. The test suite checks the same variables used to create the production
+build, so set them consistently for both commands when testing an enabled surface.
 
 PR validation and release validation run the suite after building, without a Netlify
 deployment. Browser reports, failure screenshots, and traces are retained as Actions
@@ -213,19 +224,16 @@ environment variables:
 
 - `VITE_DIVERGENT_FLOW_URL`: `https://getdivergentflow.com`
 - `VITE_WRENCHQ_URL`: `https://track.gibsonservice.co/`
-- `VITE_SHOW_DIVERGENT_FLOW_SHOWCASE`: off unless set to `true`
-- `VITE_SHOW_WRENCHQ_SHOWCASE`: off unless set to `true`
-- `VITE_SHOW_SMALL_BUSINESS_CONSULTING`: off unless set to `true`
+- `VITE_SHOW_*`: feature flags documented above; unset flags are off
 
-The current values are set in `[build.environment]` in `netlify.toml`. For local overrides,
-set these variables in an uncommitted `.env.local` file or in the shell. Local development
-otherwise uses the same current URLs as defaults.
+Set optional overrides as GitHub repository Actions variables for CI and deployment, or in
+an uncommitted `.env.local` file for local builds. The application defaults remain available
+when a URL variable is unset.
 
-These are public URLs, not secrets. Changing them requires a rebuild/deploy. When moving
-configuration to the Netlify dashboard, remove the corresponding TOML entries so they do
-not override dashboard values. Showcase flags only affect generated content; changing one
-requires a new build and deployment. The small-business page is omitted from the static output
-and sitemap unless its flag is enabled.
+These URLs and flags are public build inputs, not secrets. Changing them requires a
+rebuild/deploy. Never put credentials or private configuration in GitHub Actions variables
+with a `VITE_` prefix; Vite embeds these values in the public site output. The small-business
+page is omitted from static output and the sitemap unless its flag is enabled.
 
 ## Key Files
 
