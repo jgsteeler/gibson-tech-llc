@@ -52,7 +52,7 @@ The website architecture is intentionally kept minimal and rock-solid:
 
 * **Static Architecture:** Built with [Astro](https://astro.build/) using component-driven sections in `src/components/home/`.
 * **Styling:** Scoped CSS with Kansas City Royals heritage palette variables and local storage theme toggle (`src/styles/home.css`).
-* **Deployment:** Hosted on [Netlify](https://www.netlify.com/) via `netlify.toml` with simple git-push deploys (`build = npm run build`, `publish = dist`). Zero runtime scaling complexity, serverless bloat, or edge overhead.
+* **Deployment:** GitHub Actions builds released versions using `netlify.toml` and uploads `dist` to [Netlify](https://www.netlify.com/). Production deploys are gated on Release Please publishing a release.
 * **Feature Flag Governance:** Centralized in `src/config/features.ts`. All pricing tags ($3.5k–$5k sprint, $125–$150/hr retainer, $3,500 workshop) and direct booking CTAs are strictly guarded behind feature flags, keeping the live site in clean vanilla discovery mode until explicitly flipped.
 
 ---
@@ -78,6 +78,100 @@ Netlify config is in `netlify.toml`.
 - Build command: `npm run build`
 - Publish directory: `dist`
 
+### Releases and production deployment
+
+[Release Please](https://github.com/googleapis/release-please) manages SemVer, release PRs,
+the changelog, package versions, Git tags, and GitHub Releases. The first managed release is
+`1.0.0`; the existing package version remains unchanged until that release PR is merged.
+The archive tag `archive/copy-revamp-consulting-pr-2` preserves the original history of PR #2
+and is not a versioned release.
+
+Use Conventional Commits for individual commits:
+
+- `fix: correct a navigation link` produces a patch release.
+- `feat: add engineering articles` produces a minor release.
+- `feat!: replace a public URL structure` or a `BREAKING CHANGE:` footer produces a major release.
+- `docs:`, `chore:`, `ci:`, and `refactor:` describe maintenance work and ordinarily do not
+  trigger a release on their own.
+
+Use **Create a merge commit** for feature PRs to retain original commits. Release Please
+reads those commits; a conventional PR title alone does not replace conventional commit
+messages when using merge commits.
+
+The [release workflow](.github/workflows/release.yml) runs on pushes to `main`:
+
+1. Every push to `main` must pass Build, SAST, and Secrets validation before Release Please runs.
+   Ordinary PRs targeting `main` run the same reusable validation workflow.
+2. Normal merges create or update the pending release PR without deploying.
+3. Merging the release PR validates the merged revision before publishing its version tag
+   and GitHub Release. A failed build or scanner blocks release publication and deployment.
+4. Only when Release Please reports a new release does the deploy job check out that exact
+   tag and download the site artifact built and validated in the same workflow run.
+5. Netlify CLI uploads that artifact with `--no-build --prod`; it does not rebuild the site.
+
+The validation build uses `netlify build --offline --context production` to apply checked-in
+production configuration from `netlify.toml` without deployment credentials. It does not fetch
+dashboard-only Netlify variables. If public build configuration moves out of TOML, explicitly
+provide it to the validation job rather than allowing the build and deployment to disagree.
+This is not a Netlify build hook and does not request a hosted Netlify build.
+Netlify hosting/deploy usage still applies, as do GitHub Actions usage limits.
+
+#### Build and security gates
+
+The [validation workflow](.github/workflows/validate.yml) runs three blocking jobs:
+
+- **Build:** installs locked dependencies, runs `npm audit --audit-level=high`, and produces
+  the static site artifact. High/critical dependency advisories and audit errors block release.
+  Lower-severity advisories remain visible for triage; development dependencies are included.
+- **SAST:** Semgrep Community Edition with `p/default`, `--error`, and `--strict`. Findings
+  or scanner errors fail the job. Rules are fetched from the registry; scanning runs locally
+  in the runner with metrics disabled and no Semgrep account/token.
+- **Secrets:** pinned Gitleaks CLI scans all history reachable from the checked-out `HEAD`,
+  with secret values redacted. It does not require a Gitleaks Action license or API token.
+
+These are baseline checks, not proof of security. Semgrep coverage depends on supported
+languages and rules; Astro templates and inline scripts are not guaranteed complete coverage.
+Review them explicitly when changing data handling, HTML injection, or browser behavior.
+The registry rules can evolve independently of the pinned engine. Do not suppress findings
+or add broad secret allowlists merely to make a release pass; investigate and remediate first.
+
+No security/deployment secrets are passed into PR validation, including fork PRs. Scanner
+results are in job logs; this does not configure DAST or GitHub code-scanning/SARIF integration.
+
+Dependabot alerts and automated security updates are enabled in repository settings.
+The [Dependabot configuration](.github/dependabot.yml) adds weekly npm and GitHub Actions
+update PRs once merged into the default branch. Routine npm minor/patch updates are grouped;
+major upgrades stay separate. Updates are reviewed, not auto-merged. Dependabot does not
+monitor the Docker image tags or the Netlify CLI version embedded in shell commands; review
+those pins separately. Alerts help between releases, while the audit step gates publication.
+
+#### One-time activation
+
+- In GitHub **Settings > Actions > General > Workflow permissions**, enable **Allow GitHub
+  Actions to create and approve pull requests**. The workflow grants its release job the
+  required write permissions explicitly.
+- Add repository Actions secrets `NETLIFY_AUTH_TOKEN` (a Netlify personal access token) and
+  `NETLIFY_SITE_ID` (the existing project's ID). Do not commit token values.
+- In Netlify **Project configuration > Developer settings > Continuous deployment > Build
+  settings**, set **Build status** to **Stopped builds**. This stops Git-triggered production,
+  branch, and PR preview builds while allowing direct uploads of the prebuilt site. Do not
+  lock production publishing.
+- Merge the automation changes to `main`, review the generated `1.0.0` release PR, and merge
+  it when ready to publish.
+
+These dashboard settings and secrets are not applied by committing this configuration.
+Until Netlify builds are stopped, Git-triggered builds can still create duplicate deployments.
+
+The workflow uses `GITHUB_TOKEN` and performs deployment in the same workflow because
+events it creates generally do not start other workflows. Release Please-created PRs also
+will not automatically start separate PR-check workflows with that token. If required checks
+are added later, configure a suitably scoped GitHub App or PAT for Release Please, or arrange
+explicit validation before merging its PR.
+
+If a release is published but its deployment fails, fix the credentials/configuration and use
+**Re-run failed jobs** on that workflow run. Re-running the whole workflow may no longer
+report a newly created release, so the deploy job can be skipped.
+
 ### Product URLs
 
 Product links are configured centrally in `src/config/features.ts` using build-time Vite
@@ -97,6 +191,8 @@ the existing `showDivergentFlowLinks` and `showShopAppShowcase` flags.
 
 ## Key Files
 
+- [CI/CD and application configuration roadmap](docs/cicd-roadmap.md): Proposed cross-project
+  release, feature flag, centralized configuration, secrets, and future GitOps standards.
 - `src/pages/index.astro`: Main homepage content and styling
 - `netlify.toml`: Netlify deployment settings
 - `.github/copilot-instructions.md`: Workspace execution checklist and setup tracking
