@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.0](https://github.com/jgsteeler/gibson-tech-llc/compare/v1.1.0...v1.2.0) (2026-10-19)
+
+
+### Features
+
+* migrate components to Vue and implement theme toggle functionality ([e586ca8](https://github.com/jgsteeler/gibson-tech-llc/commit/e586ca8577f6eb4e72e499214ad16fa780cc19d0))
+* update contact methods and add Contact section to the homepage ([7d3c4dd](https://github.com/jgsteeler/gibson-tech-llc/commit/7d3c4dd8799f24855d755138e09ab07dac547676))
+* update VS Code recommendations and enhance README for Vue UI development ([e9d2a80](https://github.com/jgsteeler/gibson-tech-llc/commit/e9d2a80a971fb41de3655286f0c00930ca57fc59))
+* vue UI migration ([9e4ec62](https://github.com/jgsteeler/gibson-tech-llc/commit/9e4ec62199c56ca34fe56ea22e0af36daf57a0fa))
+
 ## [1.1.0](https://github.com/jgsteeler/gibson-tech-llc/compare/v1.0.1...v1.1.0) (2026-10-16)
 
 
