@@ -399,6 +399,11 @@ h1 span.gold {
   margin: 1rem 0;
 }
 
+.contact-email {
+  color: var(--text-main);
+  overflow-wrap: anywhere;
+}
+
 /* About Section */
 .about-grid {
   display: grid;

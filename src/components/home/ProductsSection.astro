@@ -26,7 +26,7 @@ import { config } from "../../config/features";
         <span class="badge">Audit Readiness</span>
       </div>
       {config.flags.showPenTestSprintPricing && (
-        <a class="button ghost" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=Pen-Test%20Readiness%20Audit%20Inquiry">Book Audit Sprint</a>
+        <a class="button ghost" style="margin-top: 1.2rem;" href={`mailto:${config.contactEmail}?subject=Pen-Test%20Readiness%20Audit%20Inquiry`}>Book Audit Sprint</a>
       )}
     </article>
 
@@ -47,7 +47,7 @@ import { config } from "../../config/features";
         <span class="badge">VP / Director Advisory</span>
       </div>
       {config.flags.showFractionalRetainer && (
-        <a class="button gold" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=Fractional%20Architect%20Retainer%20Inquiry">Retain Fractional Advisory</a>
+        <a class="button gold" style="margin-top: 1.2rem;" href={`mailto:${config.contactEmail}?subject=Fractional%20Architect%20Retainer%20Inquiry`}>Retain Fractional Advisory</a>
       )}
     </article>
 
@@ -68,7 +68,7 @@ import { config } from "../../config/features";
         <span class="badge">Diagnostic Mobs</span>
       </div>
       {config.flags.showAiWorkshopOffering && (
-        <a class="button ghost" style="margin-top: 1.2rem;" href="mailto:jgsteeler@gmail.com?subject=AI%20Engineering%20Mentorship%20Workshop">Schedule Team Workshop</a>
+        <a class="button ghost" style="margin-top: 1.2rem;" href={`mailto:${config.contactEmail}?subject=AI%20Engineering%20Mentorship%20Workshop`}>Schedule Team Workshop</a>
       )}
     </article>
   </div>

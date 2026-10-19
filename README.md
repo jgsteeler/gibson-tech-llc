@@ -96,7 +96,7 @@ generated static site, so they are public build-time configuration—not secrets
 controls. Changes apply after rebuilding and deploying.
 
 - `VITE_SHOW_DETAILED_HERO_CTA`: show direct commercial calls to action.
-- `VITE_SHOW_DIRECT_EMAIL_CAPTURE`: enable direct email capture.
+- `VITE_SHOW_DIRECT_EMAIL_CAPTURE`: reserved for future hosted contact forms; currently has no UI effect.
 - `VITE_SHOW_PEN_TEST_SPRINT_PRICING`: show the AppSec sprint pricing and booking CTA.
 - `VITE_SHOW_FRACTIONAL_RETAINER`: show fractional retainer pricing and CTA.
 - `VITE_SHOW_AI_WORKSHOP_OFFERING`: show the AI workshop offer and CTA.
@@ -114,6 +114,18 @@ PR validation and release validation run the suite after building, without a Net
 deployment. Browser reports, failure screenshots, and traces are retained as Actions
 artifacts for seven days. Locally, use `npx playwright show-report` to inspect the HTML report.
 The existing dependency audit runs first and can block the job before browser tests execute.
+
+### Contact options
+
+Email CTAs in the hero and the homepage contact section use `config.contactEmail` in
+[features.ts](src/config/features.ts). The contact section includes a visible address for
+visitors without a configured email app, plus a LinkedIn alternative. Email links open the
+visitor's mail app; the site does not submit or store messages.
+
+Basic contact remains available with all feature flags off. Pricing and direct booking
+offers still follow their existing flags. Hosted forms and phone/SMS contact are deferred;
+`VITE_SHOW_DIRECT_EMAIL_CAPTURE` is reserved and does not currently render a form.
+Do not publish a personal phone number or add credentials to a mail link.
 
 ## Deployment
 

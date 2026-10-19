@@ -1,4 +1,6 @@
 ---
+import { config } from "../../config/features";
+
 interface Props {
   title: string;
   description: string;
@@ -35,7 +37,7 @@ const structuredData = {
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "business inquiries",
-        email: "jgsteeler@gmail.com",
+        email: config.contactEmail,
       },
       makesOffer: [
         {

@@ -39,7 +39,7 @@ export const config: AppConfig = {
   companyName: "Gibson Tech, LLC",
   dba: "GTech",
   linkedInUrl: "https://www.linkedin.com/company/gibson-tech-llc/",
-  contactEmail: "jgsteeler@gmail.com",
+  contactEmail: "johnny@gibsontechworks.com",
   divergentFlowUrl: import.meta.env.VITE_DIVERGENT_FLOW_URL ?? "https://getdivergentflow.com",
   wrenchqUrl: import.meta.env.VITE_WRENCHQ_URL ?? "https://track.gibsonservice.co/",
   flags: {

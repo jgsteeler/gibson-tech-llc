@@ -12,7 +12,7 @@ import { config } from "../../config/features";
   </p>
   <div class="actions">
     {config.flags.showAiWorkshopOffering ? (
-      <a class="button gold" href="mailto:jgsteeler@gmail.com?subject=AI%20Engineering%20Mentorship%20Workshop">Explore Team Workshop</a>
+      <a class="button gold" href={`mailto:${config.contactEmail}?subject=AI%20Engineering%20Mentorship%20Workshop`}>Explore Team Workshop</a>
     ) : (
       <a class="button ghost" href={config.linkedInUrl} target="_blank" rel="noopener">Follow on LinkedIn ↗</a>
     )}

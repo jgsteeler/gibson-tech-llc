@@ -1,0 +1,22 @@
+---
+import { config } from "../../config/features";
+---
+
+<section id="contact" class="consulting-callout" aria-labelledby="contact-heading">
+  <p class="eyebrow">Contact Gibson Tech</p>
+  <h2 id="contact-heading">Start with the problem you need to solve.</h2>
+  <p>
+    Talk directly with Johnny Gibson about architecture, application security,
+    modernization, or engineering mentorship. A short description of your situation,
+    what you need to change, and any relevant timeline is enough to start.
+  </p>
+  <div class="actions">
+    <a class="button solid" href={`mailto:${config.contactEmail}?subject=Gibson%20Tech%20Inquiry`}>Email Johnny</a>
+    <a class="button ghost" href={config.linkedInUrl} target="_blank" rel="noopener">Gibson Tech on LinkedIn ↗</a>
+  </div>
+  <p>
+    Opens your email app. You can also copy the address:
+    <a class="contact-email" href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>.
+    Please leave passwords, credentials, and confidential system details out of your initial message.
+  </p>
+</section>

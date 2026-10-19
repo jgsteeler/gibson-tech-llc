@@ -18,12 +18,12 @@ import { config } from "../../config/features";
       {config.flags.showDetailedHeroCta ? (
         <>
           <a class="button gold" href="#capabilities">Explore Consulting Services</a>
-          <a class="button solid" href="mailto:jgsteeler@gmail.com?subject=Gibson%20Tech%20Consulting%20Inquiry">Initiate C2C Engagement</a>
+          <a class="button solid" href={`mailto:${config.contactEmail}?subject=Gibson%20Tech%20Consulting%20Inquiry`}>Initiate C2C Engagement</a>
         </>
       ) : (
         <>
           <a class="button solid" href="#capabilities">Explore Capabilities</a>
-          <a class="button ghost" href={config.linkedInUrl} target="_blank" rel="noopener">LinkedIn Company Page ↗</a>
+          <a class="button ghost" href={`mailto:${config.contactEmail}?subject=Gibson%20Tech%20Inquiry`}>Email Johnny</a>
         </>
       )}
     </div>

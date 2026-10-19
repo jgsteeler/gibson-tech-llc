@@ -29,7 +29,7 @@ const content = `# Gibson Tech, LLC
 - Organization: Gibson Tech, LLC
 - Principal Architect: Johnny Gibson
 - Website: [gibsontechworks.com](https://gibsontechworks.com/)
-- Contact: [jgsteeler@gmail.com](mailto:jgsteeler@gmail.com)
+- Contact: [${config.contactEmail}](mailto:${config.contactEmail})
 - Location: Topeka, Kansas
 - Company LinkedIn: [Gibson Tech, LLC](https://www.linkedin.com/company/gibson-tech-llc/)
 - Principal LinkedIn: [Johnny Gibson](https://www.linkedin.com/in/johnnypgibson)

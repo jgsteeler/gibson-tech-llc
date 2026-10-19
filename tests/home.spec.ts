@@ -38,6 +38,8 @@ test('publishes crawl directives, sitemap, metadata, and accurate structured dat
   expect(schemaTypes).toContain('Organization');
   expect(schemaTypes).toContain('Person');
   expect(schemaTypes).not.toContain('FAQPage');
+  expect(schema['@graph'].find((entity: { '@type': string }) => entity['@type'] === 'Organization')
+    .contactPoint.email).toBe('johnny@gibsontechworks.com');
   expect(schemaText).not.toMatch(/\$\s*\d/);
 
   const robotsResponse = await request.get('/robots.txt');
@@ -69,6 +71,7 @@ test('publishes crawl directives, sitemap, metadata, and accurate structured dat
   expect(llmsResponse.ok()).toBe(true);
   const llms = await llmsResponse.text();
   expect(llms).toContain('Gibson Tech, LLC');
+  expect(llms).toContain('[johnny@gibsontechworks.com](mailto:johnny@gibsontechworks.com)');
   expect(llms.includes('Divergent Flow')).toBe(
     process.env.VITE_SHOW_DIVERGENT_FLOW_SHOWCASE === 'true',
   );
@@ -82,11 +85,45 @@ test('navigation reaches each homepage section', async ({ page }) => {
     ['Consulting', 'capabilities'],
     ['Mentorship', 'leadership'],
     ['About', 'about'],
+    ['Contact', 'contact'],
   ]) {
     await page.getByRole('navigation').getByRole('link', { name, exact: true }).click();
     await expect(page).toHaveURL(new RegExp(`#${id}$`));
     await expect(page.locator(`#${id}`)).toBeInViewport();
   }
+});
+
+test('email contact is available without a form, SMS, or a commercial offer', async ({ page }) => {
+  await page.goto('/');
+  const contact = page.getByRole('region', { name: 'Start with the problem you need to solve.' });
+  await expect(contact).toBeVisible();
+  await expect(contact.getByRole('link', { name: 'Email Johnny', exact: true })).toHaveAttribute(
+    'href',
+    'mailto:johnny@gibsontechworks.com?subject=Gibson%20Tech%20Inquiry',
+  );
+  await expect(contact.getByRole('link', { name: 'johnny@gibsontechworks.com', exact: true })).toHaveAttribute(
+    'href',
+    'mailto:johnny@gibsontechworks.com',
+  );
+  await expect(contact).toContainText('Opens your email app');
+  await expect(contact).toContainText('confidential system details');
+  await expect(contact.getByRole('link', { name: 'Gibson Tech on LinkedIn ↗' })).toHaveAttribute(
+    'href',
+    'https://www.linkedin.com/company/gibson-tech-llc/',
+  );
+  const heroEmail = page.locator('.hero').getByRole('link', {
+    name: process.env.VITE_SHOW_DETAILED_HERO_CTA === 'true' ? 'Initiate C2C Engagement' : 'Email Johnny',
+    exact: true,
+  });
+  await expect(heroEmail).toHaveAttribute('href', /^mailto:johnny@gibsontechworks\.com\?subject=/);
+  for (const href of await page.locator('a[href^="mailto:"]').evaluateAll(
+    links => links.map(link => link.getAttribute('href')),
+  )) {
+    const emailUrl = new URL(href!);
+    expect(emailUrl.pathname).toBe('johnny@gibsontechworks.com');
+    expect([...emailUrl.searchParams.keys()].every(key => key === 'subject')).toBe(true);
+  }
+  await expect(page.locator('form, a[href^="sms:"], a[href^="tel:"]')).toHaveCount(0);
 });
 
 test('theme changes persist across reloads without horizontal overflow', async ({ page }) => {
