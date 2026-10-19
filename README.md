@@ -129,6 +129,14 @@ Do not publish a personal phone number or add credentials to a mail link.
 
 ### Vue UI development
 
+Run `npm run dev` to use Astro's dev toolbar and the Vue DevTools overlay together.
+Vue DevTools is enabled through the official Astro Vue integration, only in development;
+no separate Vite plugin configuration or browser extension is required.
+The Vue component inspector can inspect hydrated components such as the theme toggle;
+build-rendered sections do not have live component state in the browser.
+Install the recommended **Vue - Official** VS Code extension (`Vue.volar`) alongside
+the Astro extension for Vue template completion, navigation, and diagnostics.
+
 UI components use Vue single-file components with `<script setup lang="ts">` and templates.
 Run `npm run check` for TypeScript and Vue template type checking; `npm run build` includes
 this check so the existing CI Build gate also validates Vue components.

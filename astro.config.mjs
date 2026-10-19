@@ -7,5 +7,5 @@ import vue from '@astrojs/vue';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://gibsontechworks.com',
-  integrations: [sitemap(), vue()],
+  integrations: [sitemap(), vue({ devtools: true })],
 });
