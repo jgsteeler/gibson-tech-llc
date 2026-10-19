@@ -1,7 +1,10 @@
----
-import { config } from "../../config/features";
----
+<script setup lang="ts">
+import type { AppConfig } from "../../config/features";
 
+defineProps<{ config: AppConfig }>();
+</script>
+
+<template>
 <section id="contact" class="consulting-callout" aria-labelledby="contact-heading">
   <p class="eyebrow">Contact Gibson Tech</p>
   <h2 id="contact-heading">Start with the problem you need to solve.</h2>
@@ -11,12 +14,13 @@ import { config } from "../../config/features";
     what you need to change, and any relevant timeline is enough to start.
   </p>
   <div class="actions">
-    <a class="button solid" href={`mailto:${config.contactEmail}?subject=Gibson%20Tech%20Inquiry`}>Email Johnny</a>
-    <a class="button ghost" href={config.linkedInUrl} target="_blank" rel="noopener">Gibson Tech on LinkedIn ↗</a>
+    <a class="button solid" :href="`mailto:${config.contactEmail}?subject=Gibson%20Tech%20Inquiry`">Email Johnny</a>
+    <a class="button ghost" :href="config.linkedInUrl" target="_blank" rel="noopener">Gibson Tech on LinkedIn ↗</a>
   </div>
   <p>
     Opens your email app. You can also copy the address:
-    <a class="contact-email" href={`mailto:${config.contactEmail}`}>{config.contactEmail}</a>.
+    <a class="contact-email" :href="`mailto:${config.contactEmail}`">{{ config.contactEmail }}</a>.
     Please leave passwords, credentials, and confidential system details out of your initial message.
   </p>
 </section>
+</template>

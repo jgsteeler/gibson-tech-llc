@@ -1,6 +1,10 @@
----
-import { config } from "../../config/features";
----
+<script setup lang="ts">
+import type { AppConfig } from "../../config/features";
+
+defineProps<{ config: AppConfig }>();
+</script>
+
+<template>
 <section id="leadership" class="consulting-callout reveal delay-3">
   <p class="eyebrow">Engineering Leadership & Mentorship</p>
   <h2>Sound Engineering Judgment in the AI Era</h2>
@@ -11,10 +15,8 @@ import { config } from "../../config/features";
     Gibson Tech helps engineering teams apply established design principles to AI-assisted work, review changes critically, and keep system quality in view as delivery accelerates.
   </p>
   <div class="actions">
-    {config.flags.showAiWorkshopOffering ? (
-      <a class="button gold" href={`mailto:${config.contactEmail}?subject=AI%20Engineering%20Mentorship%20Workshop`}>Explore Team Workshop</a>
-    ) : (
-      <a class="button ghost" href={config.linkedInUrl} target="_blank" rel="noopener">Follow on LinkedIn ↗</a>
-    )}
+    <a v-if="config.flags.showAiWorkshopOffering" class="button gold" :href="`mailto:${config.contactEmail}?subject=AI%20Engineering%20Mentorship%20Workshop`">Explore Team Workshop</a>
+    <a v-else class="button ghost" :href="config.linkedInUrl" target="_blank" rel="noopener">Follow on LinkedIn ↗</a>
   </div>
 </section>
+</template>

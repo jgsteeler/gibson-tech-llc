@@ -1,6 +1,6 @@
 # Gibson Tech (gibsontechworks.com)
 
-Static Astro consulting site for Gibson Tech, focused on architecture, application security,
+Static Astro + Vue consulting site for Gibson Tech, focused on architecture, application security,
 and engineering advisory.
 
 ---
@@ -50,7 +50,7 @@ Within the long-range strategy (Project 55 and the Run & Gun architecture), Gibs
 
 The website architecture is intentionally kept minimal and rock-solid:
 
-* **Static Architecture:** Built with [Astro](https://astro.build/) using component-driven sections in `src/components/home/`.
+* **Static Architecture:** [Astro](https://astro.build/) handles routes, metadata, and static generation; [Vue 3](https://vuejs.org/) renders UI components in [src/components/](src/components/).
 * **Styling:** Scoped CSS with Kansas City Royals heritage palette variables and local storage theme toggle (`src/styles/home.css`).
 * **Deployment:** GitHub Actions builds released versions using `netlify.toml` and uploads `dist` to [Netlify](https://www.netlify.com/). Production deploys are gated on Release Please publishing a release.
 * **Feature Flag Governance:** Centralized in `src/config/features.ts`. Pricing tags and direct booking CTAs remain off by default. Portfolio projects and the small-business consulting page are also disabled by default; build-time flags can publish each independently when ready.
@@ -126,6 +126,27 @@ Basic contact remains available with all feature flags off. Pricing and direct b
 offers still follow their existing flags. Hosted forms and phone/SMS contact are deferred;
 `VITE_SHOW_DIRECT_EMAIL_CAPTURE` is reserved and does not currently render a form.
 Do not publish a personal phone number or add credentials to a mail link.
+
+### Vue UI development
+
+UI components use Vue single-file components with `<script setup lang="ts">` and templates.
+Run `npm run check` for TypeScript and Vue template type checking; `npm run build` includes
+this check so the existing CI Build gate also validates Vue components.
+TypeScript is held to the 6.0 patch line because the current `vue-tsc` cannot load
+TypeScript 7's compiler entry point. Reassess this constraint when upgrading Vue language tooling.
+Astro pages own route generation, the HTML document, SEO metadata, and build-time configuration.
+Configuration is passed into Vue components as typed props; static content is rendered to HTML
+at build time, without shipping Vue or feature configuration to the browser.
+
+Only [ThemeToggle.vue](src/components/home/ThemeToggle.vue) uses `client:load`. It demonstrates
+Vue's `ref`, `onMounted`, event handling, and template bindings while retaining the existing
+`gtech-theme` local storage preference. The head script still applies the saved theme before
+rendering to prevent a flash of the wrong theme. Navigation, copy, contact links, and metadata
+remain available without JavaScript. There is no SPA router, backend, or hosting change.
+
+The optional consulting page is also rendered from Vue; its Astro route remains build-flagged.
+Other applications require separate migrations in their own repositories. Portfolio descriptions
+reflect the existing projects, not an assumption that those projects have already moved to Vue.
 
 ## Deployment
 

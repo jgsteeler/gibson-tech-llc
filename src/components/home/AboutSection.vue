@@ -1,5 +1,4 @@
----
----
+<template>
 <section id="about" class="panel about-section reveal delay-3">
   <p class="eyebrow">Principal Architect</p>
   <h2>Experience Across High-Stakes Systems</h2>
@@ -24,3 +23,4 @@
     </aside>
   </div>
 </section>
+</template>

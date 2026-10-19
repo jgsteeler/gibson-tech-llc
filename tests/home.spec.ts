@@ -17,6 +17,7 @@ test('homepage presents consulting expertise without browser errors', async ({ p
   );
   await expect(page.locator('#about')).toContainText('Johnny Gibson');
   await expect(page.locator('#about')).toContainText('25 years');
+  await expect(page.getByRole('button', { name: 'Toggle dark/light theme' })).toBeEnabled();
   expect(errors).toEqual([]);
 });
 
@@ -127,6 +128,11 @@ test('email contact is available without a form, SMS, or a commercial offer', as
 });
 
 test('theme changes persist across reloads without horizontal overflow', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('console', message => {
+    if (message.type() === 'error' || message.type() === 'warning') errors.push(message.text());
+  });
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   for (const theme of ['light', 'dark']) {
@@ -134,7 +140,44 @@ test('theme changes persist across reloads without horizontal overflow', async (
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
     await page.reload();
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    await expect(page.getByRole('button', { name: 'Toggle dark/light theme' })).toBeEnabled();
+    await expect(page.locator('#theme-text')).toHaveText(theme === 'dark' ? 'Light' : 'Dark');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
+  expect(errors).toEqual([]);
+});
+
+test('Vue content is prerendered and only the theme toggle is hydrated', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('astro-island[component-url]')).toHaveCount(1);
+  await expect(page.locator('astro-island[component-url]')).toHaveAttribute('props', '{}');
+  await expect(page.locator('astro-island[component-url]')).toHaveAttribute('component-export', 'default');
+  await expect(page.locator('astro-island[component-url] #theme-toggle')).toBeEnabled();
+});
+
+test('content and contact navigation work without JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  try {
+    const page = await context.newPage();
+    await page.route('https://fonts.googleapis.com/**', route => route.fulfill({ body: '', contentType: 'text/css' }));
+    await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Resilient Distributed Systems.');
+    await expect(page.locator('#about')).toContainText('Johnny Gibson');
+    await expect(page.getByRole('button', { name: 'Toggle dark/light theme' })).toBeDisabled();
+    await page.getByRole('navigation').getByRole('link', { name: 'Contact', exact: true }).click();
+    await expect(page).toHaveURL(/#contact$/);
+    await expect(page.locator('#contact')).toBeInViewport();
+    await expect(page.locator('#contact').getByRole('link', { name: 'Email Johnny', exact: true })).toHaveAttribute(
+      'href', 'mailto:johnny@gibsontechworks.com?subject=Gibson%20Tech%20Inquiry',
+    );
+    if (process.env.VITE_SHOW_SMALL_BUSINESS_CONSULTING === 'true') {
+      await page.goto('/consulting/');
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Rapid App Development for Local Business Bottlenecks');
+      await expect(page.getByRole('heading', { name: 'What We Build Quickly' })).toBeVisible();
+      await expect(page.locator('astro-island[component-url]')).toHaveCount(0);
+    }
+  } finally {
+    await context.close();
   }
 });
 
