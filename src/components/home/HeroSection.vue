@@ -1,6 +1,10 @@
----
-import { config } from "../../config/features";
----
+<script setup lang="ts">
+import type { AppConfig } from "../../config/features";
+
+defineProps<{ config: AppConfig }>();
+</script>
+
+<template>
 <section class="hero hero-grid">
   <div class="hero-copy reveal">
     <p class="eyebrow">Enterprise Systems • Application Security • Cloud Modernization</p>
@@ -14,18 +18,15 @@ import { config } from "../../config/features";
     </p>
 
     <div class="actions">
-      <!-- Feature Flag Check: Immediate commercial action vs. clean discovery -->
-      {config.flags.showDetailedHeroCta ? (
-        <>
+      <template v-if="config.flags.showDetailedHeroCta">
           <a class="button gold" href="#capabilities">Explore Consulting Services</a>
-          <a class="button solid" href={`mailto:${config.contactEmail}?subject=Gibson%20Tech%20Consulting%20Inquiry`}>Initiate C2C Engagement</a>
-        </>
-      ) : (
-        <>
+          <a class="button solid" :href="`mailto:${config.contactEmail}?subject=Gibson%20Tech%20Consulting%20Inquiry`">Initiate C2C Engagement</a>
+      </template>
+      <template v-else>
           <a class="button solid" href="#capabilities">Explore Capabilities</a>
-          <a class="button ghost" href={`mailto:${config.contactEmail}?subject=Gibson%20Tech%20Inquiry`}>Email Johnny</a>
-        </>
-      )}
+          <a class="button ghost" :href="`mailto:${config.contactEmail}?subject=Gibson%20Tech%20Inquiry`">Email Johnny</a>
+      </template>
     </div>
   </div>
 </section>
+</template>

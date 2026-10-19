@@ -1,5 +1,17 @@
 {
   "extends": "./node_modules/astro/tsconfigs/strict.json",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ],
+  "compilerOptions": {
+    "jsx": "preserve"
+  },
+  "vueCompilerOptions": {
+    "target": 3.5,
+    "strictTemplates": true
+  }
 }
