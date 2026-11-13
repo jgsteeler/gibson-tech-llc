@@ -14,13 +14,13 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "@astrojs/vue": "^7.1.1",
-    "astro": "^7.4.0",
-    "vue": "^3.5.44"
+    "@astrojs/vue": "^7.1.2",
+    "astro": "^7.4.7",
+    "vue": "^3.5.45"
   },
   "devDependencies": {
-    "@playwright/test": "^1.64.1",
+    "@playwright/test": "^1.65.0",
     "typescript": "~6.0.3",
-    "vue-tsc": "^3.3.13"
+    "vue-tsc": "^3.3.14"
   }
 }
